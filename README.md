@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Base Connect Playground
 
-## Getting Started
+A compact example of building a multi-contract dApp on Base using Reown AppKit and Wagmi v2.
+The focus is on clear on-chain interactions, simple architecture, and a setup that’s easy to extend or learn from.
 
-First, run the development server:
+🚀 Live Demo
 
-```bash
+https://base-connect-playground.vercel.app
+
+🧩 What’s Inside
+
+Reown AppKit wallet modal
+
+Wagmi v2 contract interactions
+
+Next.js App Router
+
+Base Mainnet support
+
+Five example contracts:
+
+Counter
+
+Storage
+
+Storage Log (event only)
+
+Boolean Flag
+
+Timestamp Ping
+
+Ping All — triggers all contract calls in sequence
+
+Lightweight UI components
+
+The repo is intended as a simple, practical reference for real on-chain actions with AppKit.
+
+📁 Project Structure
+src/
+  app/
+    layout.tsx
+    page.tsx
+  components/
+    AppKitButton.tsx
+    AppKitNetworkButton.tsx
+    ContractCounter.tsx
+    ContractStorage.tsx
+    ContractStorageLog.tsx
+    ContractFlag.tsx
+    ContractTimestamp.tsx
+    PingAll.tsx
+  config/
+    index.ts
+  context/
+    index.tsx
+  lib/
+    contracts.ts
+  types/
+    *.d.ts
+public/
+
+🛠 Getting Started
+1. Install dependencies
+npm install
+
+2. Add environment variable
+
+Create .env.local:
+
+NEXT_PUBLIC_PROJECT_ID=your_reown_project_id
+
+
+Create a project ID at:
+https://cloud.walletconnect.com
+
+3. Run locally
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Visit:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+http://localhost:3000
 
-## Learn More
+📦 Build & Deploy
+Production build
+npm run build
+npm run start
 
-To learn more about Next.js, take a look at the following resources:
+Deploy to Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Push the repo to GitHub
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Import it at https://vercel.com
 
-## Deploy on Vercel
+Add:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+NEXT_PUBLIC_PROJECT_ID=
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+Deploy using default Next.js (webpack) settings
+
+🔗 Contracts
+
+Contract ABIs and addresses live in:
+
+src/lib/contracts.ts
+
+
+The example contracts are intentionally small and easy to review.
+They’re designed for fast interactions and clear event logs.
+
+💡 Why This Exists
+
+Most AppKit examples are minimal.
+This repo demonstrates:
+
+working with multiple contracts
+
+a clean pattern for AppKit + Wagmi v2
+
+Base Mainnet integration
+
+real on-chain events
+
+avoiding SSR issues in App Router
+
+It’s meant to be a simple, functional reference.
+
+📄 License
+
+MIT
