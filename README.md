@@ -1,19 +1,19 @@
 Base Connect Playground
 
-A compact example of building a multi-contract dApp on Base using Reown AppKit and Wagmi v2.
-The focus is on clear on-chain interactions, simple architecture, and a setup that’s easy to extend or learn from.
+A small example dApp built with Reown AppKit, Wagmi v2, and Next.js — deployed on Base.
+Designed to demonstrate clean, simple on-chain interactions across multiple contracts.
 
-🚀 Live Demo
+✨ Live Demo
 
-https://base-connect-playground.vercel.app
+https://base-connect-playground.vercel.app/
 
-🧩 What’s Inside
+🔧 Features
 
 Reown AppKit wallet modal
 
 Wagmi v2 contract interactions
 
-Next.js App Router
+Next.js App Router (client-only page)
 
 Base Mainnet support
 
@@ -23,19 +23,17 @@ Counter
 
 Storage
 
-Storage Log (event only)
+Storage Log (event-only)
 
 Boolean Flag
 
 Timestamp Ping
 
-Ping All — triggers all contract calls in sequence
+“Ping All” — triggers all interactions in sequence
 
-Lightweight UI components
+Clean UI components with minimal dependencies
 
-The repo is intended as a simple, practical reference for real on-chain actions with AppKit.
-
-📁 Project Structure
+📂 Project Structure
 src/
   app/
     layout.tsx
@@ -59,21 +57,21 @@ src/
     *.d.ts
 public/
 
-🛠 Getting Started
+🚀 Getting Started
 1. Install dependencies
 npm install
 
-2. Add environment variable
+2. Add environment variables
 
 Create .env.local:
 
 NEXT_PUBLIC_PROJECT_ID=your_reown_project_id
 
 
-Create a project ID at:
+Create a project ID at
 https://cloud.walletconnect.com
 
-3. Run locally
+3. Run the app
 npm run dev
 
 
@@ -82,7 +80,7 @@ Visit:
 http://localhost:3000
 
 📦 Build & Deploy
-Production build
+Build for production
 npm run build
 npm run start
 
@@ -90,41 +88,39 @@ Deploy to Vercel
 
 Push the repo to GitHub
 
-Import it at https://vercel.com
+Import it into Vercel
 
 Add:
 
 NEXT_PUBLIC_PROJECT_ID=
 
 
-Deploy using default Next.js (webpack) settings
+Deploy with default Next.js (webpack) settings
 
 🔗 Contracts
 
-Contract ABIs and addresses live in:
+Contract ABIs and addresses are stored in:
 
 src/lib/contracts.ts
 
 
-The example contracts are intentionally small and easy to review.
-They’re designed for fast interactions and clear event logs.
+The contracts are intentionally small and easy to understand, suitable for quick interactions and clear event logs.
 
-💡 Why This Exists
+💡 Purpose
 
-Most AppKit examples are minimal.
-This repo demonstrates:
+This repo exists to provide a simple, readable example of:
 
-working with multiple contracts
+integrating multiple contracts into a single dApp
 
-a clean pattern for AppKit + Wagmi v2
+structuring a Wagmi + AppKit + Next.js App Router project
 
-Base Mainnet integration
+using Base Mainnet for real on-chain actions
 
-real on-chain events
+avoiding SSR pitfalls while using Wagmi hooks
 
-avoiding SSR issues in App Router
+testing orchestrated on-chain interactions (“Ping All”)
 
-It’s meant to be a simple, functional reference.
+It’s a compact reference for developers exploring AppKit or Base.
 
 📄 License
 
