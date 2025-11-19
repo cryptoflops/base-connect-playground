@@ -1,63 +1,40 @@
 'use client';
 
-import { wagmiAdapter, projectId } from '../config';
+import React, { ReactNode } from 'react';
+import { WagmiProvider } from 'wagmi';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { wagmiAdapter, projectId } from '@/config';
 import { createAppKit } from '@reown/appkit/react';
 import { mainnet, base } from '@reown/appkit/networks';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import React, { type ReactNode } from 'react';
-import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi';
-
+// Initialize react-query client
 const queryClient = new QueryClient();
 
-if (!projectId) {
-  throw new Error('Project ID is not defined');
-}
-
 const metadata = {
-  name: 'base-connect-playground',
-  description: 'Reown AppKit + Base + Builder contracts',
-  url: 'https://example.com', // replace with your deployed domain later
+  name: 'Base Connect Playground',
+  description: 'Reown AppKit + Base + Builder Contracts',
+  url: 'https://example.com',
   icons: ['https://avatars.githubusercontent.com/u/179229932'],
 };
 
-const modal = createAppKit({
+createAppKit({
   adapters: [wagmiAdapter],
-  projectId,
+  projectId: projectId!,
   networks: [mainnet, base],
   metadata,
   features: {
     analytics: true,
-    auth: {
-      email: true,
-      socials: ['google', 'x', 'farcaster', 'github'],
-    },
-    smartAccounts: {
-      enable: true,
-      sponsorGas: true,
-    },
   },
-  themeMode: 'dark'
+  themeMode: 'dark',
 });
 
-type Props = {
-  children: ReactNode;
-  cookies: string | null;
-};
-
-function ContextProvider({ children, cookies }: Props) {
-  const initialState = cookieToInitialState(
-    wagmiAdapter.wagmiConfig as Config,
-    cookies
-  );
-
+export default function ContextProvider({ children }: { children: ReactNode }) {
   return (
-    <WagmiProvider config={wagmiAdapter.wagmiConfig as Config} initialState={initialState}>
+    <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         {children}
       </QueryClientProvider>
     </WagmiProvider>
   );
 }
-
-export default ContextProvider;

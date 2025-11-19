@@ -25,7 +25,6 @@ export function ContractCounter() {
       abi: BUILDER_COUNTER_ABI,
       functionName: 'inc',
     });
-    // simple refresh after tx
     setTimeout(() => {
       refetch();
     }, 5000);
@@ -41,7 +40,7 @@ export function ContractCounter() {
       <p className="mt-2">
         Current count:{' '}
         <span className="font-mono">
-          {count !== undefined ? count.toString() : '…'}
+          {count === undefined || count === null ? '…' : count.toString()}
         </span>
       </p>
 
