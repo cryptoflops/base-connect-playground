@@ -1,6 +1,6 @@
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
 import { cookieStorage, createStorage } from 'wagmi';
-import { base, optimism, arbitrum, celo } from '@reown/appkit/networks';
+import { base, optimism, arbitrum, celo } from 'wagmi/chains';
 
 export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 
