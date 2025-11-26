@@ -1,127 +1,28 @@
 export const BUILDER_COUNTER_ADDRESS =
-  "0xE2BE60aF8fD5A037B465e0Ea331c9C4C6979F2d1";
-
-export const BUILDER_COUNTER_ABI = [
-  {
-    inputs: [],
-    name: "count",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "inc",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-];
-
-export const BUILDER_STORAGE_ADDRESS =
-  "0xe6be4b30fe2b96709551e6581a4f5ab9d63682cd";
-
-export const BUILDER_STORAGE_ABI = [
-  {
-    inputs: [{ internalType: "address", name: "", type: "address" }],
-    name: "data",
-    outputs: [{ internalType: "string", name: "", type: "string" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "string", name: "value", type: "string" }],
-    name: "store",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-];
-
-export const BUILDER_TIMESTAMP_ADDRESS =
-  "0x537AEb3BFEA4D0003c0126680A29e4930385F8c5";
-
-export const BUILDER_TIMESTAMP_ABI = [
-  {
-    inputs: [],
-    name: "ping",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: "address", name: "user", type: "address" },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "timestamp",
-        type: "uint256",
-      },
-    ],
-    name: "Ping",
-    type: "event",
-  },
-];
+  '0x4a7c27c936d3f414f31b74023288c49110fb60bb';
 
 export const BUILDER_FLAG_ADDRESS =
-  "0x112d76Ee1E4905c7F1a12156CEa7a7AC19C602D1";
+  '0x1bb7b8a20b855eee4d1778195f2e44c693f0d39b';
 
-export const BUILDER_FLAG_ABI = [
-  {
-    inputs: [],
-    name: "flag",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "toggle",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: "address", name: "user", type: "address" },
-      {
-        indexed: false,
-        internalType: "bool",
-        name: "newValue",
-        type: "bool",
-      },
-    ],
-    name: "Toggled",
-    type: "event",
-  },
-];
+export const BUILDER_TIMESTAMP_ADDRESS =
+  '0x5ef690b84a23d96de7c1af8d4cf2e3aa8b0ca21a';
+
+export const BUILDER_STORAGE_ADDRESS =
+  '0x2e5a1fe39a38dcb7631c6fba588f5cc0bb0f2e5c';
 
 export const BUILDER_STORAGE_LOG_ADDRESS =
-  "0xA837341F480B6c3bb98b3E7F03db3A76C700659B";
+  '0x23d97969cc73a4a0cb0c3ac0f8e66f8a9634e3a0';
 
-export const BUILDER_STORAGE_LOG_ABI = [
-  {
-    name: "store",
-    type: "function",
-    stateMutability: "nonpayable",
-    inputs: [{ internalType: "string", name: "value", type: "string" }],
-    outputs: [],
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: "address", name: "user", type: "address" },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "value",
-        type: "string",
-      },
-    ],
-    name: "Stored",
-    type: "event",
-  },
-];
+export const BUILDER_EVENT_STREAM_ADDRESS =
+  '0x43F6852EdB7f8B93637Fa76855E5Fa9993Ee9778';
+
+export const BUILDER_SCORE_TRACKER_ADDRESS =
+  '0xB7AdfC6009A0f821a670a6ec15B84c9Bc072AA01';
+
+export { default as BUILDER_COUNTER_ABI } from '@/abi/BuilderCounter.json';
+export { default as BUILDER_FLAG_ABI } from '@/abi/BuilderFlag.json';
+export { default as BUILDER_TIMESTAMP_ABI } from '@/abi/BuilderTimestamp.json';
+export { default as BUILDER_STORAGE_ABI } from '@/abi/BuilderStorage.json';
+export { default as BUILDER_STORAGE_LOG_ABI } from '@/abi/BuilderStorageLog.json';
+export { default as BUILDER_EVENT_STREAM_ABI } from '@/abi/BuilderEventStream.json';
+export { default as BUILDER_SCORE_TRACKER_ABI } from '@/abi/BuilderScoreTracker.json';

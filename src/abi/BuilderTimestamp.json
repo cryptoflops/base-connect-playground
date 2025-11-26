@@ -1,0 +1,9 @@
+[
+  {
+    "inputs": [],
+    "name": "ping",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

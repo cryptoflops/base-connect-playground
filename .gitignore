@@ -5,7 +5,8 @@
 
 # Next.js build output
 .next/
-out/
+node_modules/
+.next/cache/
 
 # Dependencies
 node_modules/

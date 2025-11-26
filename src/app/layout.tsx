@@ -1,14 +1,13 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import ClientWrapper from '@/components/ClientWrapper';
+import './globals.css';
 
-import ClientWrapper from "@/components/ClientWrapper";
-
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Base Connect Playground",
-  description: "Reown AppKit + Base + Builder Contracts",
+  title: 'Base Connect Playground',
+  description: 'Reown AppKit + Base + Multichain Builder Playground',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

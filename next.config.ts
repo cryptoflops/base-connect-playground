@@ -1,27 +1,28 @@
-// next.config.ts
-
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
-
   webpack: (config) => {
-    //
-    // ⛔ Fix for Safe connector breaking Next.js (CJS require('viem'))
-    //    We disable Safe modules entirely, because you do NOT use Safe.
-    //
-    config.resolve.alias["@safe-global/safe-apps-sdk"] = false;
-config.resolve.alias["@safe-global/safe-apps-provider"] = false;
-config.resolve.alias["@wagmi/connectors/safe"] = false;
-config.resolve.alias["@metamask/sdk"] = false;
-config.resolve.alias["pino-pretty"] = false;
-    //
-    // ⛔ Also disable the Safe connector inside wagmi/connectors
-    //    so webpack never tries to include it.
-    //
-    config.resolve.alias["@wagmi/connectors/safe"] = false;
+    // Ignore optional deps from MetaMask SDK
+    config.resolve.fallback = {
+      ...(config.resolve.fallback || {}),
+      "pino-pretty": false,
+      "@react-native-async-storage/async-storage": false,
+    };
 
     return config;
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https: http:; object-src 'none'; base-uri 'none';",
+          },
+        ],
+      },
+    ];
   },
 };
 
