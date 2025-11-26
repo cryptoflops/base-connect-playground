@@ -1,131 +1,92 @@
 # ⚡ Base Connect Playground
 
-A compact example of building a multi-contract dApp on Base using Reown AppKit and Wagmi v2.
-The focus is on clear on-chain interactions, simple architecture, and a setup that’s easy to extend or learn from.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Next.js](https://img.shields.io/badge/Next.js-15.0-black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38bdf8)
+![Reown](https://img.shields.io/badge/Reown-AppKit-orange)
 
-🚀 Live Demo
+> **A futuristic, multi-chain builder lab powered by Reown AppKit, WalletConnect, and Base.**
 
-https://base-connect-playground.vercel.app
+This project is a high-performance playground for Web3 developers, demonstrating how to build robust, multi-chain dApps with a premium "Techno-Modular" UI. It features real on-chain interactions, a revenue-generating tip jar, and a seamless wallet connection experience.
 
-🧩 What’s Inside
+---
 
-Reown AppKit wallet modal
+## 🚀 Features
 
-Wagmi v2 contract interactions
+- **Futuristic UI**: A "Dark Neon" aesthetic with glassmorphism, pulse animations, and a modular grid layout.
+- **Multi-Chain Support**: Built for **Base**, **Optimism**, and **Celo**, with easy network switching.
+- **Reown AppKit Integration**: Full implementation of the latest AppKit for wallet connection and modal management.
+- **Wagmi v2 Hooks**: Clean, modern hooks for contract interactions (Read, Write, Events).
+- **Revenue Ready**: Integrated **"Support Builder"** feature allowing users to send ETH tips (presets + custom amounts).
+- **Developer Friendly**: Type-safe, linted, and optimized for Next.js App Router.
 
-Next.js App Router
+## 🛠 Tech Stack
 
-Base Mainnet support
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) + Custom Animations
+- **Web3 SDK**: [Reown AppKit](https://reown.com/) (formerly WalletConnect)
+- **Ethereum Hooks**: [Wagmi](https://wagmi.sh/) + [Viem](https://viem.sh/)
+- **State Management**: [TanStack Query](https://tanstack.com/query/latest)
 
-Five example contracts:
+## 📦 Getting Started
 
-Counter
+### Prerequisites
 
-Storage
+- Node.js 20+ (Required for Next.js 15)
+- npm or yarn
 
-Storage Log (event only)
+### Installation
 
-Boolean Flag
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/cryptoflops/base-connect-playground.git
+    cd base-connect-playground
+    ```
 
-Timestamp Ping
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-Ping All — triggers all contract calls in sequence
+3.  **Configure Environment:**
+    Create a `.env.local` file in the root directory and add your Reown Project ID:
+    ```env
+    NEXT_PUBLIC_PROJECT_ID=your_reown_project_id
+    ```
+    > Get your Project ID at [cloud.reown.com](https://cloud.reown.com).
 
-Lightweight UI components
+4.  **Run Locally:**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-The repo is intended as a simple, practical reference for real on-chain actions with AppKit.
+## 🚢 Deployment
 
-📁 Project Structure
-src/
-  app/
-    layout.tsx
-    page.tsx
-  components/
-    AppKitButton.tsx
-    AppKitNetworkButton.tsx
-    ContractCounter.tsx
-    ContractStorage.tsx
-    ContractStorageLog.tsx
-    ContractFlag.tsx
-    ContractTimestamp.tsx
-    PingAll.tsx
-  config/
-    index.ts
-  context/
-    index.tsx
-  lib/
-    contracts.ts
-  types/
-    *.d.ts
-public/
+### Deploy to Vercel
 
-🛠 Getting Started
-1. Install dependencies
-npm install
+The easiest way to deploy is using [Vercel](https://vercel.com).
 
-2. Add environment variable
+1.  Push your code to a GitHub repository.
+2.  Import the project into Vercel.
+3.  Add the `NEXT_PUBLIC_PROJECT_ID` environment variable in the Vercel dashboard.
+4.  Click **Deploy**.
 
-Create .env.local:
+> **Note:** Ensure your Vercel project is set to use Node.js 20.x in the "Settings" > "General" > "Node.js Version" section.
 
-NEXT_PUBLIC_PROJECT_ID=your_reown_project_id
+## 🧩 Contract Interactions
 
+The playground includes verified contracts on Base Mainnet for testing:
+- **Counter**: Increment/Decrement state.
+- **Storage**: Read/Write string values.
+- **Boolean Flag**: Toggle true/false state.
+- **Timestamp**: Record block timestamps.
+- **Events**: Listen for real-time contract events.
 
-Create a project ID at:
-https://cloud.walletconnect.com
+## 🤝 Contributing
 
-3. Run locally
-npm run dev
+Contributions are welcome! Please feel free to submit a Pull Request.
 
+## 📄 License
 
-Visit:
-
-http://localhost:3000
-
-📦 Build & Deploy
-Production build
-npm run build
-npm run start
-
-Deploy to Vercel
-
-Push the repo to GitHub
-
-Import it at https://vercel.com
-
-Add:
-
-NEXT_PUBLIC_PROJECT_ID=
-
-
-Deploy using default Next.js (webpack) settings
-
-🔗 Contracts
-
-Contract ABIs and addresses live in:
-
-src/lib/contracts.ts
-
-
-The example contracts are intentionally small and easy to review.
-They’re designed for fast interactions and clear event logs.
-
-💡 Why This Exists
-
-Most AppKit examples are minimal.
-This repo demonstrates:
-
-working with multiple contracts
-
-a clean pattern for AppKit + Wagmi v2
-
-Base Mainnet integration
-
-real on-chain events
-
-avoiding SSR issues in App Router
-
-It’s meant to be a simple, functional reference.
-
-📄 License
-
-MIT
+This project is open-source and available under the [MIT License](LICENSE).
