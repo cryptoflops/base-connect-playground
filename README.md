@@ -1,8 +1,11 @@
 # Base Connect Playground
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Next.js](https://img.shields.io/badge/Next.js-15.0-black)
-![Reown](https://img.shields.io/badge/Reown-AppKit-orange)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/cryptoflops/base-connect-playground)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-91.8%25-blue)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.0-black)](https://nextjs.org/)
+[![WalletConnect](https://img.shields.io/badge/WalletConnect-Reown_AppKit-orange)](https://reown.com/)
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://base-connect-playground.vercel.app)
 
 **A multi-chain dApp playground built with Reown AppKit, Wagmi, and Base.**
 
