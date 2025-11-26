@@ -1,38 +1,38 @@
-# ⚡ Base Connect Playground
+# Base Connect Playground
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-15.0-black)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38bdf8)
 ![Reown](https://img.shields.io/badge/Reown-AppKit-orange)
 
-> **A futuristic, multi-chain builder lab powered by Reown AppKit, WalletConnect, and Base.**
+**A multi-chain dApp playground built with Reown AppKit, Wagmi, and Base.**
 
-This project is a high-performance playground for Web3 developers, demonstrating how to build robust, multi-chain dApps with a premium "Techno-Modular" UI. It features real on-chain interactions, a revenue-generating tip jar, and a seamless wallet connection experience.
+This project serves as a practical reference for building Web3 applications. It demonstrates how to integrate wallet connection, handle multi-chain interactions, and execute smart contract transactions using modern hooks and libraries.
 
 ---
 
-## 🚀 Features
+## ⚡ Core Features
 
-- **Futuristic UI**: A "Dark Neon" aesthetic with glassmorphism, pulse animations, and a modular grid layout.
-- **Multi-Chain Support**: Built for **Base**, **Optimism**, and **Celo**, with easy network switching.
-- **Reown AppKit Integration**: Full implementation of the latest AppKit for wallet connection and modal management.
-- **Wagmi v2 Hooks**: Clean, modern hooks for contract interactions (Read, Write, Events).
-- **Revenue Ready**: Integrated **"Support Builder"** feature allowing users to send ETH tips (presets + custom amounts).
-- **Developer Friendly**: Type-safe, linted, and optimized for Next.js App Router.
+- **Multi-Chain Connectivity**: Seamlessly switch between **Base**, **Optimism**, and **Celo** networks.
+- **Wallet Integration**: Full implementation of **Reown AppKit** for secure and easy wallet connections.
+- **Smart Contract Interactions**:
+    - **Read/Write**: Examples of reading state and writing transactions to contracts.
+    - **Events**: Real-time event listening and display.
+    - **Error Handling**: Robust handling of transaction states and errors.
+- **Support Builder**: A functional feature allowing users to send ETH tips (presets or custom amounts) to a designated address.
 
 ## 🛠 Tech Stack
 
 - **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) + Custom Animations
-- **Web3 SDK**: [Reown AppKit](https://reown.com/) (formerly WalletConnect)
-- **Ethereum Hooks**: [Wagmi](https://wagmi.sh/) + [Viem](https://viem.sh/)
+- **Web3 SDK**: [Reown AppKit](https://reown.com/)
+- **Ethereum Hooks**: [Wagmi](https://wagmi.sh/) & [Viem](https://viem.sh/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **State Management**: [TanStack Query](https://tanstack.com/query/latest)
 
 ## 📦 Getting Started
 
 ### Prerequisites
 
-- Node.js 20+ (Required for Next.js 15)
+- **Node.js 20+** (Required for Next.js 15)
 - npm or yarn
 
 ### Installation
@@ -53,39 +53,37 @@ This project is a high-performance playground for Web3 developers, demonstrating
     ```env
     NEXT_PUBLIC_PROJECT_ID=your_reown_project_id
     ```
-    > Get your Project ID at [cloud.reown.com](https://cloud.reown.com).
+    > You can obtain a Project ID at [cloud.reown.com](https://cloud.reown.com).
 
 4.  **Run Locally:**
     ```bash
     npm run dev
     ```
-    Open [http://localhost:3000](http://localhost:3000) in your browser.
+    The application will be available at [http://localhost:3000](http://localhost:3000).
 
 ## 🚢 Deployment
 
 ### Deploy to Vercel
 
-The easiest way to deploy is using [Vercel](https://vercel.com).
-
 1.  Push your code to a GitHub repository.
-2.  Import the project into Vercel.
-3.  Add the `NEXT_PUBLIC_PROJECT_ID` environment variable in the Vercel dashboard.
-4.  Click **Deploy**.
+2.  Import the project into [Vercel](https://vercel.com).
+3.  Add the `NEXT_PUBLIC_PROJECT_ID` environment variable in the Vercel project settings.
+4.  **Important**: Ensure the Node.js version is set to **20.x** in the Vercel project settings ("General" > "Node.js Version").
+5.  Deploy.
 
-> **Note:** Ensure your Vercel project is set to use Node.js 20.x in the "Settings" > "General" > "Node.js Version" section.
+## 🧩 Contract Examples
 
-## 🧩 Contract Interactions
+The playground interacts with several verified contracts on Base Mainnet to demonstrate different capabilities:
 
-The playground includes verified contracts on Base Mainnet for testing:
-- **Counter**: Increment/Decrement state.
-- **Storage**: Read/Write string values.
-- **Boolean Flag**: Toggle true/false state.
-- **Timestamp**: Record block timestamps.
-- **Events**: Listen for real-time contract events.
+- **Counter**: Simple state mutation (increment/decrement).
+- **Storage**: Reading and writing string data.
+- **Boolean Flag**: Toggling a boolean state.
+- **Timestamp**: Recording block timestamps.
+- **Events**: monitoring contract events in real-time.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome. Please submit a Pull Request for any enhancements or bug fixes.
 
 ## 📄 License
 
