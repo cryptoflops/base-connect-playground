@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAccount, useReadContract, useWriteContract } from 'wagmi';
 import { BUILDER_FLAG_ADDRESS, BUILDER_FLAG_ABI } from '@/lib/contracts';
+import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractFlag() {
   const { isConnected } = useAccount();
@@ -13,10 +14,10 @@ export function ContractFlag() {
     functionName: 'flag',
   });
 
-  const [lastTx, setLastTx] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  const logDispatch = useLogDispatch();
   const { writeContractAsync } = useWriteContract();
 
   useEffect(() => setMounted(true), []);
@@ -31,7 +32,24 @@ export function ContractFlag() {
         abi: BUILDER_FLAG_ABI,
         functionName: 'toggle',
       });
-      setLastTx(tx);
+      logDispatch({
+        type: 'ADD_LOG',
+        payload: {
+          type: 'tx',
+          title: 'Flag Toggled',
+          message: 'Execute toggle() on BuilderFlag contract',
+          txHash: tx
+        }
+      });
+    } catch (err: any) {
+       logDispatch({
+        type: 'ADD_LOG',
+        payload: {
+          type: 'error',
+          title: 'Toggle Failed',
+          message: err.message || String(err)
+        }
+      });
     } finally {
       setIsPending(false);
     }
@@ -40,47 +58,30 @@ export function ContractFlag() {
   const display = flagValue ? 'On' : 'Off';
 
   return (
-    <div className="rounded-card border border-white/5 bg-[#050505] p-6 shadow-card transition">
-      <h2 className="text-lg font-semibold text-offwhite">
-        <span className="mr-2 text-burnt">◆</span>
-        Flag
-      </h2>
-
-      <p className="mt-1 text-sm text-offwhite/60">
-        Toggle a simple onchain boolean. Useful for gating flows or marking state.
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center gap-2">
+        <h3 className="text-sm font-semibold text-foreground">Flag</h3>
+      </div>
+      <p className="text-sm text-foreground/50">
+        Toggle a simple onchain boolean.
       </p>
 
-      <div className="mt-5 flex items-center justify-between rounded-card border border-white/10 bg-black/40 px-4 py-3">
-        <span className="text-sm text-offwhite/60">Current value</span>
-        <span className="rounded-pill bg-[#181818] px-3 py-1 text-xs font-semibold text-offwhite">
+      <div className="mt-2 flex items-center justify-between rounded-lg border border-border bg-muted/20 px-3 py-2">
+        <span className="text-xs text-foreground/60">Current state</span>
+        <span className="rounded bg-muted px-2 py-0.5 text-xs font-semibold text-foreground">
           {display}
         </span>
       </div>
 
-      <button
-        onClick={handleToggle}
-        disabled={!isConnected || isPending}
-        className="mt-4 w-full rounded-pill bg-burnt px-4 py-2 text-sm font-medium text-pitch transition hover:bg-danger disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {isPending ? 'Toggling…' : 'Toggle Flag'}
-      </button>
-
-      {!isConnected && (
-        <p className="mt-3 text-xs text-danger/80">Connect a wallet to toggle.</p>
-      )}
-
-      {lastTx && (
-        <div className="mt-5 rounded-card border border-white/10 bg-black/40 p-4 text-xs text-offwhite/80">
-          <a
-            href={`https://basescan.org/tx/${lastTx}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline decoration-burnt underline-offset-2 hover:text-burnt"
-          >
-            View transaction
-          </a>
-        </div>
-      )}
+      <div className="mt-2">
+        <button
+          onClick={handleToggle}
+          disabled={!isConnected || isPending}
+          className="button-primary w-full"
+        >
+          {isPending ? 'Toggling...' : 'Toggle Flag'}
+        </button>
+      </div>
     </div>
   );
 }

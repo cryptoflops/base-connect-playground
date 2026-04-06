@@ -6,15 +6,16 @@ import {
   BUILDER_EVENT_STREAM_ADDRESS,
   BUILDER_EVENT_STREAM_ABI,
 } from '@/lib/contracts';
+import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractEventStream() {
   const { isConnected } = useAccount();
 
   const [message, setMessage] = useState('');
-  const [lastTx, setLastTx] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  const logDispatch = useLogDispatch();
   const { writeContractAsync } = useWriteContract();
 
   useEffect(() => setMounted(true), []);
@@ -32,58 +33,55 @@ export function ContractEventStream() {
         args: [message],
       });
 
-      setLastTx(tx);
+      logDispatch({
+        type: 'ADD_LOG',
+        payload: {
+          type: 'tx',
+          title: 'Event Stream Pushed',
+          message: `Pushed string: "${message}"`,
+          txHash: tx
+        }
+      });
       setMessage('');
+    } catch (err: any) {
+      logDispatch({
+        type: 'ADD_LOG',
+        payload: {
+          type: 'error',
+          title: 'Event Stream Failed',
+          message: err.message || String(err)
+        }
+      });
     } finally {
       setIsPending(false);
     }
   };
 
   return (
-    <div className="rounded-card border border-white/5 bg-[#050505] p-6 shadow-card transition">
-      <h2 className="text-lg font-semibold text-offwhite">
-        <span className="mr-2 text-burnt">◆</span>
-        Event Stream
-      </h2>
-
-      <p className="mt-1 text-sm text-offwhite/60">
-        Push human-readable messages into an onchain event stream. Useful for dashboards, audits,
-        and multi-step flows.
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center gap-2">
+        <h3 className="text-sm font-semibold text-foreground">Event Stream</h3>
+      </div>
+      <p className="text-sm text-foreground/50">
+        Push human-readable messages into an onchain event stream. Useful for dashboards, audits, and multi-step flows.
       </p>
 
-      <div className="mt-5 space-y-4">
+      <div className="mt-2 flex flex-col sm:flex-row gap-3">
         <input
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Message…"
-          className="w-full rounded-pill border border-white/10 bg-black/40 px-4 py-2 text-sm text-offwhite placeholder-offwhite/40 focus:border-burnt outline-none"
+          placeholder="Message..."
+          className="input-field flex-1"
         />
 
         <button
           onClick={handleSubmit}
-          disabled={!isConnected || isPending}
-          className="w-full rounded-pill bg-burnt px-4 py-2 text-sm font-medium text-pitch transition hover:bg-danger disabled:cursor-not-allowed disabled:opacity-60"
+          disabled={!isConnected || isPending || !message.trim()}
+          className="button-primary whitespace-nowrap"
         >
-          {isPending ? 'Submitting…' : 'Push Event'}
+          {isPending ? 'Submitting...' : 'Push Event'}
         </button>
       </div>
-
-      {!isConnected && (
-        <p className="mt-3 text-xs text-danger/80">Connect a wallet to submit events.</p>
-      )}
-
-      {lastTx && (
-        <div className="mt-5 rounded-card border border-white/10 bg-black/40 p-4 text-xs text-offwhite/80">
-          <a
-            href={`https://basescan.org/tx/${lastTx}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline decoration-burnt underline-offset-2 hover:text-burnt"
-          >
-            View transaction
-          </a>
-        </div>
-      )}
     </div>
   );
 }

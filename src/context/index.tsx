@@ -30,10 +30,14 @@ export const appKit = createAppKit({
   },
 });
 
+import { LogProvider } from './LogContext';
+
 export default function ContextProvider({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={wagmiAdapter.wagmiConfig}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <LogProvider>{children}</LogProvider>
+      </QueryClientProvider>
     </WagmiProvider>
   );
 }

@@ -11,6 +11,7 @@ import { ContractEventStream } from '@/components/ContractEventStream';
 import { ContractScoreTracker } from '@/components/ContractScoreTracker';
 import { PingAll } from '@/components/PingAll';
 import { SupportBuilder } from '@/components/SupportBuilder';
+import { LogPanel } from '@/components/LogPanel';
 
 import AppKitButton from '@/components/AppKitButton';
 import AppKitNetworkButton from '@/components/AppKitNetworkButton';
@@ -22,120 +23,86 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <main className="min-h-screen px-4 py-8 md:px-8 md:py-12">
-      <div className="mx-auto flex max-w-[1400px] flex-col space-y-8">
+    <main className="min-h-screen px-4 py-8 md:px-8 bg-background selection:bg-primary selection:text-white">
+      <div className="mx-auto flex max-w-[1400px] flex-col space-y-6">
+        
         {/* Header Section */}
-        <header className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl p-8 sm:p-10">
-          <div className="absolute inset-0 bg-gradient-to-r from-base-blue/10 via-neon-purple/10 to-optimism-red/10 animate-pulse-slow" />
-          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <header className="flex flex-col items-start justify-between gap-4 border-b border-border pb-6 sm:flex-row sm:items-center">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-primary" />
+              Base Connect Playground
+            </h1>
+            <p className="mt-1 text-sm text-foreground/60">
+              Test wallet connections and events on Base.
+            </p>
+          </div>
 
-          <div className="relative z-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <span className="pill-label border-base-blue/30 text-base-blue bg-base-blue/10">
-                  Base
-                </span>
-                <span className="pill-label border-optimism-red/30 text-optimism-red bg-optimism-red/10">
-                  Optimism
-                </span>
-                <span className="pill-label border-celo-yellow/30 text-celo-yellow bg-celo-yellow/10">
-                  Celo
-                </span>
-              </div>
-              <h1 className="text-5xl font-bold tracking-tight sm:text-6xl font-display bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400 neon-text">
-                Base Connect
-              </h1>
-              <p className="max-w-xl text-lg text-gray-400 font-light">
-                Advanced multichain builder lab. Powered by <span className="text-white font-medium">Reown AppKit</span> & <span className="text-white font-medium">WalletConnect</span>.
-              </p>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="flex items-center gap-4 mr-2 text-xs font-medium">
+              <a href="https://docs.base.org" target="_blank" className="text-foreground/60 hover:text-foreground transition-colors">Base Docs →</a>
+              <a href="https://github.com/base/account-sdk" target="_blank" className="text-foreground/60 hover:text-foreground transition-colors">SDK GitHub →</a>
             </div>
-
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <div className="p-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
-                <AppKitNetworkButton />
-              </div>
-              <div className="p-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
-                <AppKitButton />
-              </div>
+            <div className="flex items-center gap-2">
+              <AppKitNetworkButton />
+              <AppKitButton />
             </div>
           </div>
         </header>
 
-        <section className="grid gap-8 lg:grid-cols-12">
-          {/* Main Content Area */}
-          <div className="lg:col-span-8 space-y-8">
-            {/* Network Status Panel */}
-            <div className="tech-card">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <h2 className="text-xl font-bold text-white font-display">Network Status</h2>
+        {/* Workspace Layout */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start relative">
+          
+          {/* Action Column (Left) */}
+          <div className="lg:col-span-7 xl:col-span-8 flex flex-col border border-border rounded-xl bg-background divide-y divide-border shadow-sm">
+            
+            <section className="p-6">
+              <h2 className="action-group-label">Infrastructure</h2>
+              <div className="mt-4">
+                <PingAll />
               </div>
-              <PingAll />
-            </div>
+            </section>
 
-            {/* Contracts Grid */}
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="tech-card group">
-                <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-neon-blue">
-                  ↗
-                </div>
+            <section className="p-6">
+              <h2 className="action-group-label">State Controls</h2>
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <ContractCounter />
-              </div>
-              <div className="tech-card group">
-                <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-neon-purple">
-                  ↗
-                </div>
                 <ContractFlag />
               </div>
-              <div className="tech-card">
+            </section>
+
+            <section className="p-6">
+              <h2 className="action-group-label">Storage & Events</h2>
+              <div className="mt-4 flex flex-col gap-8">
                 <ContractTimestamp />
-              </div>
-              <div className="tech-card">
                 <ContractStorage />
-              </div>
-              <div className="tech-card md:col-span-2">
                 <ContractStorageLog />
-              </div>
-              <div className="tech-card md:col-span-2">
                 <ContractEventStream />
               </div>
-              <div className="tech-card md:col-span-2">
+            </section>
+
+            <section className="p-6">
+              <h2 className="action-group-label">Gamification</h2>
+              <div className="mt-4">
                 <ContractScoreTracker />
               </div>
-            </div>
+            </section>
+
           </div>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-4 space-y-8">
-            <SupportBuilder />
-
-            {/* Quick Links Panel */}
-            <div className="tech-card">
-              <h3 className="text-lg font-bold mb-4 text-white flex items-center gap-2">
-                <span className="text-celo-yellow">⚡</span> Quick Access
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  { name: 'Reown Documentation', url: 'https://docs.reown.com', icon: '📚' },
-                  { name: 'Base Network', url: 'https://base.org', icon: '🔵' },
-                  { name: 'WalletConnect GitHub', url: 'https://github.com/WalletConnect', icon: '💻' },
-                ].map((link) => (
-                  <li key={link.name}>
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group"
-                    >
-                      <span className="text-xl group-hover:scale-110 transition-transform">{link.icon}</span>
-                      <span className="text-sm text-gray-300 group-hover:text-white font-medium">{link.name}</span>
-                      <span className="ml-auto text-gray-600 group-hover:text-white transition-colors">→</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+          {/* State & Logs Column (Right) */}
+          <div className="lg:col-span-5 xl:col-span-4 flex flex-col gap-6 lg:sticky top-8">
+            <div className="h-[500px] lg:h-[calc(100vh-160px)]">
+              <LogPanel />
             </div>
+            {/* <SupportBuilder /> => optionally added back if relevant, left aside to keep clean */}
           </div>
-        </section>
+
+        </div>
+
+        <footer className="text-center py-6 text-xs text-foreground/40">
+          Test-only playground for Base-compatible wallets · Built with Next.js on Vercel
+        </footer>
       </div>
     </main>
   );

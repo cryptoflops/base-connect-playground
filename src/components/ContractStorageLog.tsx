@@ -6,14 +6,15 @@ import {
   BUILDER_STORAGE_LOG_ADDRESS,
   BUILDER_STORAGE_LOG_ABI,
 } from '@/lib/contracts';
+import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractStorageLog() {
   const { isConnected } = useAccount();
   const [value, setValue] = useState('');
-  const [lastTx, setLastTx] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  const logDispatch = useLogDispatch();
   const { writeContractAsync } = useWriteContract();
 
   useEffect(() => setMounted(true), []);
@@ -29,58 +30,55 @@ export function ContractStorageLog() {
         functionName: 'store',
         args: [value],
       });
-      setLastTx(tx);
+      logDispatch({
+        type: 'ADD_LOG',
+        payload: {
+          type: 'tx',
+          title: 'Storage Logged',
+          message: `Executed store() + event with value: "${value}"`,
+          txHash: tx
+        }
+      });
       setValue('');
+    } catch (err: any) {
+      logDispatch({
+        type: 'ADD_LOG',
+        payload: {
+          type: 'error',
+          title: 'Storage Log Failed',
+          message: err.message || String(err)
+        }
+      });
     } finally {
       setIsPending(false);
     }
   };
 
   return (
-    <div className="rounded-card border border-white/5 bg-[#050505] p-6 shadow-card transition">
-      <h2 className="text-lg font-semibold text-offwhite">
-        <span className="mr-2 text-burnt">◆</span>
-        Storage + Indexed Log
-      </h2>
-
-      <p className="mt-1 text-sm text-offwhite/60">
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center gap-2">
+        <h3 className="text-sm font-semibold text-foreground">Storage + Indexed Log</h3>
+      </div>
+      <p className="text-sm text-foreground/50">
         Store a text value & emit an indexed event. Useful for audits and analytics.
       </p>
 
-      <div className="mt-5 space-y-4">
+      <div className="mt-2 flex flex-col sm:flex-row gap-3">
         <input
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Log message…"
-          className="w-full rounded-pill border border-white/10 bg-black/40 px-4 py-2 text-sm text-offwhite placeholder-offwhite/40 focus:border-burnt outline-none"
+          placeholder="Log message..."
+          className="input-field flex-1"
         />
 
         <button
           onClick={handleStore}
-          disabled={!isConnected || isPending}
-          className="w-full rounded-pill bg-burnt px-4 py-2 text-sm font-medium text-pitch transition hover:bg-danger disabled:cursor-not-allowed disabled:opacity-60"
+          disabled={!isConnected || isPending || !value.trim()}
+          className="button-primary whitespace-nowrap"
         >
-          {isPending ? 'Logging…' : 'Store & Emit'}
+          {isPending ? 'Logging...' : 'Store & Emit'}
         </button>
       </div>
-
-      {!isConnected && (
-        <p className="mt-3 text-xs text-danger/80">
-          Connect a wallet to store events.
-        </p>
-      )}
-
-      {lastTx && (
-        <div className="mt-5 rounded-card border border-white/10 bg-black/40 p-4 text-xs text-offwhite/80">
-          <a
-            href={`https://basescan.org/tx/${lastTx}`}
-            target="_blank"
-            className="underline decoration-burnt underline-offset-2 hover:text-burnt"
-          >
-            View transaction
-          </a>
-        </div>
-      )}
     </div>
   );
 }

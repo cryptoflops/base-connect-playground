@@ -19,13 +19,14 @@ import {
   BUILDER_SCORE_TRACKER_ADDRESS,
   BUILDER_SCORE_TRACKER_ABI,
 } from '@/lib/contracts';
+import { useLogDispatch } from '@/context/LogContext';
 
 export function PingAll() {
   const { isConnected, address } = useAccount();
-  const [txHashes, setTxHashes] = useState<string[]>([]);
   const [isPending, setIsPending] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  const logDispatch = useLogDispatch();
   const { writeContractAsync } = useWriteContract();
 
   useEffect(() => setMounted(true), []);
@@ -34,10 +35,11 @@ export function PingAll() {
   const run = async () => {
     if (!isConnected) return;
 
-    const hashes: string[] = [];
     setIsPending(true);
 
     try {
+      const hashes = [];
+
       hashes.push(
         await writeContractAsync({
           address: BUILDER_COUNTER_ADDRESS as `0x${string}`,
@@ -98,69 +100,49 @@ export function PingAll() {
         })
       );
 
-      setTxHashes(hashes);
-    } catch (err) {
-      console.error(err);
+      logDispatch({
+        type: 'ADD_LOG',
+        payload: {
+          type: 'tx',
+          title: 'Ping All Sequence Executed',
+          message: `Successfully executed 7 contract interactions.`,
+          txHash: hashes[hashes.length - 1] // just show last one as representative, or adjust LogPanel to handle multiple.
+        }
+      });
+    } catch (err: any) {
+      logDispatch({
+        type: 'ADD_LOG',
+        payload: {
+          type: 'error',
+          title: 'Ping All Failed',
+          message: err.message || String(err)
+        }
+      });
     } finally {
       setIsPending(false);
     }
   };
 
   return (
-    <div className="rounded-card border border-white/5 bg-[#050505] p-8 shadow-card transition">
-      <div className="space-y-5">
-        <div className="space-y-2">
-          <span className="rounded-pill bg-[#111111] px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-offwhite/80">
-            Multi-Contract Orchestration
-          </span>
-
-          <h2 className="text-2xl font-semibold tracking-tight text-offwhite">
-            Sponsored Ping All
-          </h2>
-
-          <p className="max-w-2xl text-sm leading-relaxed text-offwhite/60">
-            Run a complete multi-contract sequence in one click. This touches all Builder contracts:
-            Counter, Flag, Timestamp, Storage, StorageLog, EventStream, and ScoreTracker. Ideal for
-            demos, stress tests, dashboards, and tracking flows.
-          </p>
-        </div>
-
-        <button
-          onClick={run}
-          disabled={!isConnected || isPending}
-          className="w-full rounded-pill bg-burnt px-6 py-3 text-sm font-medium text-pitch transition hover:bg-danger disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {isPending ? 'Executing flow…' : 'Run Ping All'}
-        </button>
-
-        {!isConnected && (
-          <p className="text-xs text-danger/80">Connect a wallet to execute the flow.</p>
-        )}
-
-        {txHashes.length > 0 && (
-          <div className="rounded-card border border-white/10 bg-black/40 p-4 text-xs text-offwhite/80">
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-offwhite/60">
-              Recent transactions
-            </p>
-
-            <div className="space-y-1">
-              {txHashes.map((tx, index) => (
-                <p key={tx}>
-                  {index + 1}.{' '}
-                  <a
-                    href={`https://basescan.org/tx/${tx}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline decoration-burnt underline-offset-2 hover:text-burnt"
-                  >
-                    View #{index + 1} on BaseScan
-                  </a>
-                </p>
-              ))}
-            </div>
-          </div>
-        )}
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center gap-2">
+        <h3 className="text-sm font-semibold text-foreground">Multi-Contract Orchestration (Sponsored)</h3>
       </div>
+      <p className="text-sm text-foreground/50">
+        Run a complete sequence touching all 7 playground contracts.
+      </p>
+
+      <div className="mt-2 text-xs text-foreground/50 mb-2">
+        Contracts: Counter, Flag, Timestamp, Storage, StorageLog, EventStream, ScoreTracker
+      </div>
+
+      <button
+        onClick={run}
+        disabled={!isConnected || isPending}
+        className="button-primary w-full"
+      >
+        {isPending ? 'Executing full sequence...' : 'Run Ping All'}
+      </button>
     </div>
   );
 }

@@ -6,11 +6,12 @@ import {
   BUILDER_SCORE_TRACKER_ADDRESS,
   BUILDER_SCORE_TRACKER_ABI,
 } from '@/lib/contracts';
+import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractScoreTracker() {
   const { address, isConnected } = useAccount();
 
-  const { data: score } = useReadContract({
+  const { data: score, refetch } = useReadContract({
     address: BUILDER_SCORE_TRACKER_ADDRESS as `0x${string}`,
     abi: BUILDER_SCORE_TRACKER_ABI,
     functionName: 'getScore',
@@ -18,10 +19,10 @@ export function ContractScoreTracker() {
   });
 
   const [amount, setAmount] = useState('1');
-  const [lastTx, setLastTx] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  const logDispatch = useLogDispatch();
   const { writeContractAsync } = useWriteContract();
 
   useEffect(() => setMounted(true), []);
@@ -42,7 +43,26 @@ export function ContractScoreTracker() {
         functionName: 'increment',
         args: [n],
       });
-      setLastTx(tx);
+      logDispatch({
+        type: 'ADD_LOG',
+        payload: {
+          type: 'tx',
+          title: 'Score Incremented',
+          message: `Increased score by ${n}`,
+          txHash: tx
+        }
+      });
+      // Refetch after tx to update local display
+      refetch();
+    } catch (err: any) {
+       logDispatch({
+        type: 'ADD_LOG',
+        payload: {
+          type: 'error',
+          title: 'Score Increment Failed',
+          message: err.message || String(err)
+        }
+      });
     } finally {
       setIsPending(false);
     }
@@ -51,58 +71,38 @@ export function ContractScoreTracker() {
   const displayScore = score ? score.toString() : '—';
 
   return (
-    <div className="rounded-card border border-white/5 bg-[#050505] p-6 shadow-card transition">
-      <h2 className="text-lg font-semibold text-offwhite">
-        <span className="mr-2 text-burnt">◆</span>
-        Score Tracker
-      </h2>
-
-      <p className="mt-1 text-sm text-offwhite/60">
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center gap-2">
+        <h3 className="text-sm font-semibold text-foreground">Score Tracker</h3>
+      </div>
+      <p className="text-sm text-foreground/50">
         Increase your onchain builder score. Useful for gamification, leaderboards, and activity tracking.
       </p>
 
-      <div className="mt-5 space-y-4">
-        <div className="flex items-center justify-between rounded-card border border-white/10 bg-black/40 px-4 py-3">
-          <span className="text-sm text-offwhite/60">Your score</span>
-          <span className="font-mono text-offwhite">{displayScore}</span>
+      <div className="mt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-2 rounded-lg border border-border bg-muted/20 px-3 py-2 w-full sm:w-auto">
+          <span className="text-xs text-foreground/60">Your score:</span>
+          <span className="font-mono text-sm font-bold text-foreground">{displayScore}</span>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <input
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             type="number"
             min={1}
-            className="w-24 rounded-pill border border-white/10 bg-black/40 px-4 py-2 text-sm text-offwhite placeholder-offwhite/40 outline-none focus:border-burnt"
+            className="input-field w-20"
             placeholder="1"
           />
-
           <button
             onClick={handleIncrement}
             disabled={!isConnected || isPending}
-            className="flex-1 rounded-pill bg-burnt px-4 py-2 text-sm font-medium text-pitch transition hover:bg-danger disabled:cursor-not-allowed disabled:opacity-60"
+            className="button-primary flex-1 sm:flex-none whitespace-nowrap"
           >
-            {isPending ? 'Updating…' : 'Increase Score'}
+            {isPending ? 'Updating...' : 'Increase Score'}
           </button>
         </div>
       </div>
-
-      {!isConnected && (
-        <p className="mt-3 text-xs text-danger/80">Connect a wallet to update your score.</p>
-      )}
-
-      {lastTx && (
-        <div className="mt-5 rounded-card border border-white/10 bg-black/40 p-4 text-xs text-offwhite/80">
-          <a
-            href={`https://basescan.org/tx/${lastTx}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline decoration-burnt underline-offset-2 hover:text-burnt"
-          >
-            View transaction
-          </a>
-        </div>
-      )}
     </div>
   );
 }
