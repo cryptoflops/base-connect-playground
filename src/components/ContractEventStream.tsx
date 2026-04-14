@@ -58,30 +58,15 @@ export function ContractEventStream() {
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <h3 className="text-sm font-semibold text-foreground">Event Stream</h3>
+    <div 
+      onClick={() => { setMessage('Event Stream Payload'); handleSubmit(); }}
+      className={`bg-surface-container p-6 rounded-lg hover:bg-surface-container-high transition-all flex items-center justify-between ${isConnected && !isPending ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}
+    >
+      <div className="flex items-center gap-4">
+        <span className="material-symbols-outlined text-primary-container">sensors</span>
+        <span className="font-bold">Event Stream</span>
       </div>
-      <p className="text-sm text-foreground/50">
-        Push human-readable messages into an onchain event stream. Useful for dashboards, audits, and multi-step flows.
-      </p>
-
-      <div className="mt-2 flex flex-col sm:flex-row gap-3">
-        <input
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Message..."
-          className="input-field flex-1"
-        />
-
-        <button
-          onClick={handleSubmit}
-          disabled={!isConnected || isPending || !message.trim()}
-          className="button-primary whitespace-nowrap"
-        >
-          {isPending ? 'Submitting...' : 'Push Event'}
-        </button>
-      </div>
+      <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
     </div>
   );
 }

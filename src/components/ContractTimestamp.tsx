@@ -55,32 +55,15 @@ export function ContractTimestamp() {
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <h3 className="text-sm font-semibold text-foreground">Timestamp Ping</h3>
+    <div 
+      onClick={handlePing}
+      className={`bg-surface-container p-6 rounded-lg hover:bg-surface-container-high transition-all flex items-center justify-between ${isConnected && !isPending ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}
+    >
+      <div className="flex items-center gap-4">
+        <span className="material-symbols-outlined text-primary-container">schedule</span>
+        <span className="font-bold">Timestamp Ping</span>
       </div>
-      <p className="text-sm text-foreground/50">
-        Emit a timestamp event from your wallet. Useful for analytics or heartbeat signals.
-      </p>
-
-      {localPing && (
-        <div className="mt-2 flex items-center gap-4 justify-between rounded-lg border border-border bg-muted/20 px-3 py-2">
-          <span className="text-xs text-foreground/60 whitespace-nowrap">Last local ping</span>
-          <span className="rounded bg-muted px-2 py-0.5 text-[10px] font-mono text-foreground truncate">
-            {localPing}
-          </span>
-        </div>
-      )}
-
-      <div className="mt-2">
-        <button
-          onClick={handlePing}
-          disabled={!isConnected || isPending}
-          className="button-primary w-full"
-        >
-          {isPending ? 'Pinging...' : 'Send Ping'}
-        </button>
-      </div>
+      <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
     </div>
   );
 }

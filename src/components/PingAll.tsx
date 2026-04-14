@@ -124,24 +124,18 @@ export function PingAll() {
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <h3 className="text-sm font-semibold text-foreground">Multi-Contract Orchestration (Sponsored)</h3>
+    <div className="bg-surface-container rounded-xl p-8 flex justify-between items-center group hover:bg-surface-container-high transition-colors">
+      <div>
+        <h3 className="text-xl font-bold mb-2">Multi-Contract Orchestration</h3>
+        <p className="text-on-surface-variant">Sponsored execution for multi-chain ping relays.</p>
       </div>
-      <p className="text-sm text-foreground/50">
-        Run a complete sequence touching all 7 playground contracts.
-      </p>
-
-      <div className="mt-2 text-xs text-foreground/50 mb-2">
-        Contracts: Counter, Flag, Timestamp, Storage, StorageLog, EventStream, ScoreTracker
-      </div>
-
       <button
         onClick={run}
         disabled={!isConnected || isPending}
-        className="button-primary w-full"
+        className="bg-primary-container text-white px-8 py-4 rounded-lg font-bold flex items-center gap-3 hover:scale-[1.02] transition-transform disabled:opacity-50"
       >
-        {isPending ? 'Executing full sequence...' : 'Run Ping All'}
+        <span className="material-symbols-outlined">rocket_launch</span>
+        {isPending ? 'Executing...' : 'Run Ping All'}
       </button>
     </div>
   );

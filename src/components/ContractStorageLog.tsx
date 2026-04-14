@@ -55,30 +55,15 @@ export function ContractStorageLog() {
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <h3 className="text-sm font-semibold text-foreground">Storage + Indexed Log</h3>
+    <div 
+      onClick={() => { setValue('Storage Log Test Payload'); handleStore(); }}
+      className={`bg-surface-container p-6 rounded-lg hover:bg-surface-container-high transition-all flex items-center justify-between ${isConnected && !isPending ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}
+    >
+      <div className="flex items-center gap-4">
+        <span className="material-symbols-outlined text-primary-container">view_stream</span>
+        <span className="font-bold">Storage + Indexed Log</span>
       </div>
-      <p className="text-sm text-foreground/50">
-        Store a text value & emit an indexed event. Useful for audits and analytics.
-      </p>
-
-      <div className="mt-2 flex flex-col sm:flex-row gap-3">
-        <input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder="Log message..."
-          className="input-field flex-1"
-        />
-
-        <button
-          onClick={handleStore}
-          disabled={!isConnected || isPending || !value.trim()}
-          className="button-primary whitespace-nowrap"
-        >
-          {isPending ? 'Logging...' : 'Store & Emit'}
-        </button>
-      </div>
+      <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
     </div>
   );
 }

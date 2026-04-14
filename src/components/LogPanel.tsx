@@ -11,45 +11,46 @@ export function LogPanel() {
   const filteredLogs = logs.filter(log => filter === 'all' || log.type === filter);
 
   return (
-    <div className="flex h-full flex-col border border-border bg-background rounded-xl overflow-hidden shadow-sm">
-      {/* Header & Tabs */}
-      <div className="flex items-center justify-between border-b border-border bg-muted/30 px-4 py-3">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setFilter('all')}
-            className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded transition-colors ${filter === 'all' ? 'bg-primary/20 text-primary' : 'text-foreground/40 hover:bg-muted'}`}
-          >
-            All Logs
-          </button>
-          <button
-            onClick={() => setFilter('tx')}
-            className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded transition-colors ${filter === 'tx' ? 'bg-primary/20 text-primary' : 'text-foreground/40 hover:bg-muted'}`}
-          >
-            Transactions
-          </button>
-          <button
-            onClick={() => setFilter('error')}
-            className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded transition-colors ${filter === 'error' ? 'bg-danger/20 text-danger' : 'text-foreground/40 hover:bg-muted'}`}
-          >
-            Errors
-          </button>
+    <>
+      <div className="p-6 border-b border-outline-variant/10">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="font-['Inter'] font-bold text-lg">Activity Log</h2>
+          <span className="w-2 h-2 rounded-full bg-[#0000FF] animate-pulse"></span>
         </div>
+        <p className="text-xs text-[#C5C4DB] opacity-60">Live Chain Stream (Base Mainnet)</p>
+      </div>
+
+      <div className="flex border-b border-outline-variant/10">
         <button
-          onClick={() => dispatch({ type: 'CLEAR_LOGS' })}
-          className="text-[10px] uppercase tracking-wider font-semibold text-foreground/40 hover:text-foreground transition-colors"
+          onClick={() => setFilter('all')}
+          className={`flex-1 py-4 text-xs flex flex-col items-center gap-1 transition-opacity ${filter === 'all' ? 'font-bold text-on-surface border-b-2 border-primary-container' : 'font-medium text-[#C5C4DB] opacity-60 hover:opacity-100'}`}
         >
-          Clear
+          <span className="material-symbols-outlined text-[18px]">terminal</span>
+          Logs
+        </button>
+        <button
+          onClick={() => setFilter('tx')}
+          className={`flex-1 py-4 text-xs flex flex-col items-center gap-1 transition-opacity ${filter === 'tx' ? 'font-bold text-on-surface border-b-2 border-primary-container' : 'font-medium text-[#C5C4DB] opacity-60 hover:opacity-100'}`}
+        >
+          <span className="material-symbols-outlined text-[18px]">swap_horiz</span>
+          TXs
+        </button>
+        <button
+          onClick={() => setFilter('error')}
+          className={`flex-1 py-4 text-xs flex flex-col items-center gap-1 transition-opacity ${filter === 'error' ? 'font-bold text-on-surface border-b-2 border-primary-container' : 'font-medium text-[#C5C4DB] opacity-60 hover:opacity-100'}`}
+        >
+          <span className="material-symbols-outlined text-[18px]">error_outline</span>
+          Errors
         </button>
       </div>
 
-      {/* Log List */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3 font-mono text-sm min-h-[400px] max-h-[80vh] bg-background">
+      <div className="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 font-mono text-[0.75rem]">
         {logs.length === 0 ? (
-          <div className="flex h-full items-center justify-center text-foreground/30 text-sm font-sans">
+          <div className="flex h-full items-center justify-center text-on-surface-variant font-sans text-center">
             <p>No events recorded yet. Connect a wallet and trigger an action.</p>
           </div>
         ) : filteredLogs.length === 0 ? (
-          <div className="flex h-full items-center justify-center text-foreground/30 text-sm font-sans">
+          <div className="flex h-full items-center justify-center text-on-surface-variant font-sans text-center">
             <p>No logs match the current filter.</p>
           </div>
         ) : (
@@ -58,7 +59,16 @@ export function LogPanel() {
           ))
         )}
       </div>
-    </div>
+
+      <div className="p-4 border-t border-outline-variant/10">
+        <button
+          onClick={() => dispatch({ type: 'CLEAR_LOGS' })}
+          className="w-full bg-surface-container-high text-xs font-bold py-3 rounded-lg hover:bg-primary-container hover:text-white transition-all"
+        >
+          Clear Terminal
+        </button>
+      </div>
+    </>
   );
 }
 
@@ -67,46 +77,37 @@ function LogCard({ log }: { log: LogEntry }) {
   
   const getBadgeColor = () => {
     switch (log.type) {
-      case 'success': return 'bg-green-500/10 text-green-500 border-green-500/20';
-      case 'error': return 'bg-danger/10 text-danger border-danger/20';
-      case 'tx': return 'bg-primary/10 text-primary border-primary/20';
-      default: return 'bg-muted text-foreground/60 border-border';
+      case 'error': return 'bg-error-container/20 border-error border-l-2';
+      case 'tx': return 'bg-surface-container border-primary-container border-l-2';
+      default: return 'bg-surface-container opacity-80';
     }
   };
+  
+  const getLabelColor = () => {
+    switch (log.type) {
+      case 'error': return 'text-error';
+      case 'tx': return 'text-primary-container';
+      default: return 'text-tertiary';
+    }
+  }
 
   return (
-    <div className="flex flex-col gap-1.5 rounded-lg border border-border bg-muted/10 p-3 shadow-sm">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className={`px-1.5 py-0.5 text-[9px] uppercase tracking-wider rounded border ${getBadgeColor()}`}>
-            {log.type}
-          </span>
-          <strong className="text-xs font-medium text-foreground/90 font-sans">{log.title}</strong>
-        </div>
-        <span className="text-[10px] text-foreground/40">{time}</span>
+    <div className={`p-3 rounded-lg ${getBadgeColor()}`}>
+      <div className="flex justify-between mb-1">
+        <span className={`${getLabelColor()} font-bold uppercase truncate pr-2`}>{log.title || log.type}</span>
+        <span className="text-[10px] text-on-surface-variant whitespace-nowrap">{time}</span>
       </div>
+      <p className="text-on-surface-variant break-words">{log.message}</p>
       
-      {log.message && (
-        <p className="text-xs text-foreground/70 mt-1">{log.message}</p>
-      )}
-
       {log.txHash && (
         <a
           href={`https://sepolia.basescan.org/tx/${log.txHash}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-primary flex items-center gap-1 hover:text-primary-hover hover:underline transition-colors truncate mt-1"
+          className="text-primary-fixed mt-1 block truncate hover:underline"
         >
-          <span className="text-foreground/40">TxHash:</span> {log.txHash}
+          {log.txHash}
         </a>
-      )}
-
-      {log.payload && (
-        <div className="mt-2 rounded bg-background p-2 overflow-x-auto border border-border/50">
-          <pre className="text-[11px] text-foreground/80 leading-relaxed block">
-            {JSON.stringify(log.payload, null, 2)}
-          </pre>
-        </div>
       )}
     </div>
   );

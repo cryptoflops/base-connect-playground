@@ -55,31 +55,18 @@ export function ContractFlag() {
     }
   };
 
-  const display = flagValue ? 'On' : 'Off';
-
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <h3 className="text-sm font-semibold text-foreground">Flag</h3>
-      </div>
-      <p className="text-sm text-foreground/50">
-        Toggle a simple onchain boolean.
-      </p>
-
-      <div className="mt-2 flex items-center justify-between rounded-lg border border-border bg-muted/20 px-3 py-2">
-        <span className="text-xs text-foreground/60">Current state</span>
-        <span className="rounded bg-muted px-2 py-0.5 text-xs font-semibold text-foreground">
-          {display}
-        </span>
-      </div>
-
-      <div className="mt-2">
+    <div className="bg-surface-container-lowest p-8 rounded-xl border-l-2 border-primary-container h-full">
+      <label className="text-[0.6875rem] uppercase tracking-widest text-on-surface-variant mb-4 block">State Controls</label>
+      <h3 className="text-2xl font-bold mb-6">Flag</h3>
+      <div className="flex items-center justify-between">
+        <span className="text-on-surface-variant font-medium">Toggle Boolean State</span>
         <button
           onClick={handleToggle}
           disabled={!isConnected || isPending}
-          className="button-primary w-full"
+          className={`w-16 h-8 rounded-full relative p-1 transition-all disabled:opacity-50 ${flagValue ? 'bg-primary-container' : 'bg-surface-variant'}`}
         >
-          {isPending ? 'Toggling...' : 'Toggle Flag'}
+          <span className={`absolute top-1 w-6 h-6 bg-white rounded-full transition-all ${flagValue ? 'right-1' : 'left-1'}`}></span>
         </button>
       </div>
     </div>

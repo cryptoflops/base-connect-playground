@@ -10,7 +10,6 @@ import { ContractTimestamp } from '@/components/ContractTimestamp';
 import { ContractEventStream } from '@/components/ContractEventStream';
 import { ContractScoreTracker } from '@/components/ContractScoreTracker';
 import { PingAll } from '@/components/PingAll';
-import { SupportBuilder } from '@/components/SupportBuilder';
 import { LogPanel } from '@/components/LogPanel';
 
 import AppKitButton from '@/components/AppKitButton';
@@ -23,87 +22,88 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <main className="min-h-screen px-4 py-8 md:px-8 bg-background selection:bg-primary selection:text-white">
-      <div className="mx-auto flex max-w-[1400px] flex-col space-y-6">
-        
-        {/* Header Section */}
-        <header className="flex flex-col items-start justify-between gap-4 border-b border-border pb-6 sm:flex-row sm:items-center">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
-              <div className="w-4 h-4 rounded-full bg-primary" />
-              Base Connect Playground
-            </h1>
-            <p className="mt-1 text-sm text-foreground/60">
-              Test wallet connections and events on Base.
-            </p>
+    <>
+      <nav className="fixed top-0 w-full z-50 bg-[#131313]/70 backdrop-blur-3xl flex justify-between items-center px-8 h-20 max-w-[1920px] mx-auto">
+        <div className="flex items-center gap-12">
+          <span className="text-2xl font-black tracking-tighter text-on-surface uppercase">Playground</span>
+          <div className="hidden md:flex items-center bg-surface-container-lowest p-1 rounded-full border border-outline-variant/15">
+            <button className="px-4 py-1.5 rounded-full text-[0.875rem] font-bold bg-primary-container text-white flex items-center gap-2 transition-all">
+              <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_#fff]"></span> Base
+            </button>
+            <button className="px-4 py-1.5 rounded-full text-[0.875rem] font-medium text-on-surface-variant hover:text-on-surface transition-colors">Celo</button>
+            <button className="px-4 py-1.5 rounded-full text-[0.875rem] font-medium text-on-surface-variant hover:text-on-surface transition-colors">Optimism</button>
+            <button className="px-4 py-1.5 rounded-full text-[0.875rem] font-medium text-on-surface-variant hover:text-on-surface transition-colors">Arbitrum</button>
           </div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <div className="flex items-center gap-4 mr-2 text-xs font-medium">
-              <a href="https://docs.base.org" target="_blank" className="text-foreground/60 hover:text-foreground transition-colors">Base Docs →</a>
-              <a href="https://github.com/base/account-sdk" target="_blank" className="text-foreground/60 hover:text-foreground transition-colors">SDK GitHub →</a>
-            </div>
-            <div className="flex items-center gap-2">
-              <AppKitNetworkButton />
+        </div>
+        <div className="flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-8">
+            <a className="text-on-surface border-b-2 border-primary-container pb-1 font-bold tracking-tight" href="#">Docs</a>
+            <a className="text-[#C5C4DB] hover:text-on-surface transition-colors font-bold tracking-tight" href="#">Contracts</a>
+            <a className="text-[#C5C4DB] hover:text-on-surface transition-colors font-bold tracking-tight" href="#">Security</a>
+            <a className="text-[#C5C4DB] hover:text-on-surface transition-colors font-bold tracking-tight" href="#">Explorer</a>
+          </div>
+          <div className="flex items-center gap-4 ml-4">
+            <AppKitNetworkButton />
+            <div className="scale-90 origin-right">
               <AppKitButton />
             </div>
           </div>
-        </header>
+        </div>
+      </nav>
 
-        {/* Workspace Layout */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start relative">
-          
-          {/* Action Column (Left) */}
-          <div className="lg:col-span-7 xl:col-span-8 flex flex-col border border-border rounded-xl bg-background divide-y divide-border shadow-sm">
-            
-            <section className="p-6">
-              <h2 className="action-group-label">Infrastructure</h2>
-              <div className="mt-4">
-                <PingAll />
-              </div>
-            </section>
+      <main className="pt-24 min-h-screen flex">
+        <section className="flex-1 px-8 pb-20 max-w-5xl">
+          <div className="mb-16 mt-8 relative">
+            <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary-container/10 blur-[120px] rounded-full pointer-events-none"></div>
+            <h1 className="text-[3.5rem] font-bold tracking-tight leading-none mb-4">Base Network</h1>
+            <p className="text-on-surface-variant text-[1.125rem] max-w-2xl leading-relaxed">
+              A premium environment for multi-chain development. Execute cross-contract logic and manage state with millisecond precision.
+            </p>
+          </div>
 
-            <section className="p-6">
-              <h2 className="action-group-label">State Controls</h2>
-              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <ContractCounter />
-                <ContractFlag />
-              </div>
-            </section>
+          <div className="space-y-20">
+            <div>
+              <label className="text-[0.6875rem] tracking-[0.05em] uppercase text-on-surface-variant mb-6 block">Infrastructure</label>
+              <PingAll />
+            </div>
 
-            <section className="p-6">
-              <h2 className="action-group-label">Storage & Events</h2>
-              <div className="mt-4 flex flex-col gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <ContractCounter />
+              <ContractFlag />
+            </div>
+
+            <div>
+              <label className="text-[0.6875rem] tracking-[0.05em] uppercase text-on-surface-variant mb-6 block">Storage & Events</label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <ContractTimestamp />
                 <ContractStorage />
                 <ContractStorageLog />
                 <ContractEventStream />
               </div>
-            </section>
-
-            <section className="p-6">
-              <h2 className="action-group-label">Gamification</h2>
-              <div className="mt-4">
-                <ContractScoreTracker />
-              </div>
-            </section>
-
-          </div>
-
-          {/* State & Logs Column (Right) */}
-          <div className="lg:col-span-5 xl:col-span-4 flex flex-col gap-6 lg:sticky top-8">
-            <div className="h-[500px] lg:h-[calc(100vh-160px)]">
-              <LogPanel />
             </div>
-            {/* <SupportBuilder /> => optionally added back if relevant, left aside to keep clean */}
+
+            <ContractScoreTracker />
           </div>
 
-        </div>
+          <footer className="mt-32 pt-16 border-t border-outline-variant/15 flex justify-between items-center text-[0.6875rem] uppercase tracking-[0.05em]">
+            <span className="text-on-surface-variant">© 2026 Multi-Chain Playground</span>
+            <div className="flex gap-8">
+              <a className="text-[#C5C4DB] hover:text-on-surface transition-colors" href="#">Privacy</a>
+              <a className="text-[#C5C4DB] hover:text-on-surface transition-colors" href="#">Terms</a>
+              <a className="text-[#C5C4DB] hover:text-on-surface transition-colors" href="#">GitHub</a>
+              <a className="text-[#C5C4DB] hover:text-on-surface transition-colors" href="#">Status</a>
+            </div>
+          </footer>
+        </section>
 
-        <footer className="text-center py-6 text-xs text-foreground/40">
-          Test-only playground for Base-compatible wallets · Built with Next.js on Vercel
-        </footer>
-      </div>
-    </main>
+        <aside className="fixed right-0 top-20 flex flex-col h-[calc(100vh-80px)] border-l border-[#454558]/15 bg-surface-container-lowest w-80">
+          <LogPanel />
+        </aside>
+      </main>
+
+      <button className="fixed bottom-8 right-[340px] w-14 h-14 bg-primary-container text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-40">
+        <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>add</span>
+      </button>
+    </>
   );
 }

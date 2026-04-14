@@ -51,19 +51,15 @@ export function ContractCounter() {
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <h3 className="text-sm font-semibold text-foreground">Counter</h3>
-      </div>
-      <p className="text-sm text-foreground/50">
-        Increment a simple counter onchain. Useful for tracking action frequency.
-      </p>
-
-      <div className="mt-2 flex items-center justify-between gap-4">
+    <div className="bg-surface-container-lowest p-8 rounded-xl border-l-2 border-primary-container h-full">
+      <label className="text-[0.6875rem] uppercase tracking-widest text-on-surface-variant mb-4 block">State Controls</label>
+      <h3 className="text-2xl font-bold mb-6">Counter</h3>
+      <div className="flex items-center gap-6">
+        <span className="text-4xl font-mono bg-surface-container px-6 py-2 rounded-lg">42</span>
         <button
           onClick={handleIncrement}
           disabled={!isConnected || isPending}
-          className="button-primary w-full"
+          className="flex-1 bg-surface-container-high py-4 rounded-lg font-bold hover:bg-on-surface-variant/20 transition-colors disabled:opacity-50"
         >
           {isPending ? 'Incrementing...' : 'Increment'}
         </button>

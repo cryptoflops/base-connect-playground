@@ -71,35 +71,26 @@ export function ContractScoreTracker() {
   const displayScore = score ? score.toString() : '—';
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <h3 className="text-sm font-semibold text-foreground">Score Tracker</h3>
-      </div>
-      <p className="text-sm text-foreground/50">
-        Increase your onchain builder score. Useful for gamification, leaderboards, and activity tracking.
-      </p>
-
-      <div className="mt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-2 rounded-lg border border-border bg-muted/20 px-3 py-2 w-full sm:w-auto">
-          <span className="text-xs text-foreground/60">Your score:</span>
-          <span className="font-mono text-sm font-bold text-foreground">{displayScore}</span>
+    <div className="bg-surface-container rounded-2xl overflow-hidden relative group">
+      <img 
+        className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity" 
+        alt="abstract digital waves" 
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuALB0h2M6zRId6aZDz1sYIx9SYdsipcI6dDS7XNVOZR9ZuhKJxyT3g02X7X7ZvjqWigbVBTRkc_bDSW34glXbmRBZ_cVeIguMvGPul84kbEyiUuhwmkUpaZVm-wS0o9ApusuiCJ1lsaalpwOP90jLE6f02W48tUGNHDSAF181A_IOT7zVBkOFK2jTDm_Ggpw3MoJiWD2TJDBUX_CZ5vUcKnR1vMTMLcOspguf_M-kqBPBGuWJ8Qfeb78jkpmSk5MoZI4rDvwUpA1do" 
+      />
+      <div className="relative p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div>
+          <label className="text-[0.6875rem] uppercase tracking-[0.2em] text-primary mb-4 block">Gamification</label>
+          <h2 className="text-4xl font-bold mb-2">Score Tracker</h2>
+          <p className="text-on-surface-variant max-w-md">Global chain leaderboard integration. Secure your rank on the decentralized ledger.</p>
         </div>
-
-        <div className="flex items-center gap-2 w-full sm:w-auto">
-          <input
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            type="number"
-            min={1}
-            className="input-field w-20"
-            placeholder="1"
-          />
-          <button
-            onClick={handleIncrement}
+        <div className="flex flex-col items-end">
+          <span className="text-5xl font-black text-white mb-4">{displayScore} pts</span>
+          <button 
+            onClick={() => handleIncrement()}
             disabled={!isConnected || isPending}
-            className="button-primary flex-1 sm:flex-none whitespace-nowrap"
+            className="bg-white text-black px-10 py-3 rounded-full font-bold hover:scale-[1.05] transition-transform disabled:opacity-50"
           >
-            {isPending ? 'Updating...' : 'Increase Score'}
+            {isPending ? 'Updating...' : 'Update Score'}
           </button>
         </div>
       </div>

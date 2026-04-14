@@ -8,37 +8,27 @@
   }
   
   body {
-    @apply antialiased bg-background text-foreground font-sans;
+    @apply antialiased bg-background text-on-surface font-sans;
   }
   
   ::selection {
-    background-color: theme('colors.primary.DEFAULT');
+    background-color: theme('colors.primary-container');
     color: white;
+  }
+
+  .material-symbols-outlined { 
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; 
   }
 }
 
-@layer components {
-  .button-primary {
-    @apply inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-hover active:bg-primary-active disabled:cursor-not-allowed disabled:opacity-50;
+@layer utilities {
+  .glass-panel { 
+    background: rgba(19, 19, 19, 0.7); 
+    backdrop-filter: blur(24px); 
+    border-top: 1px solid rgba(229, 226, 225, 0.1); 
   }
   
-  .button-secondary {
-    @apply inline-flex items-center justify-center rounded-lg border border-border bg-muted/50 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50;
-  }
-
-  .input-field {
-    @apply flex h-10 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-foreground/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50;
-  }
-  
-  .divider {
-    @apply h-px w-full bg-border;
-  }
-
-  .action-group {
-    @apply flex flex-col gap-4 pb-6 pt-2;
-  }
-  
-  .action-group-label {
-    @apply text-xs font-semibold tracking-wider text-foreground/40 uppercase mb-2;
+  .no-scrollbar::-webkit-scrollbar { 
+    display: none; 
   }
 }
