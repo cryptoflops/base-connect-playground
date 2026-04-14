@@ -36,18 +36,17 @@ export default function Home() {
     42161: 'arbitrum'
   };
   
-  const themeName = themeMap[activeNet.id] || 'base';
+  const themeName = themeMap[Number(activeNet.id)] || 'base';
 
   useEffect(() => {
     setMounted(true);
-    document.documentElement.setAttribute('data-theme', themeName);
-  }, [themeName]);
+  }, []);
 
   if (!mounted) return null;
 
   return (
-    <>
-      <nav className="fixed top-0 w-full z-50 bg-[#131313]/70 backdrop-blur-3xl flex justify-between items-center px-8 h-20 max-w-[1920px] mx-auto">
+    <div className={`theme-${themeName} min-h-screen w-full`}>
+      <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-3xl flex justify-between items-center px-8 h-20 max-w-[1920px] mx-auto border-b border-outline-variant/5">
         <div className="flex items-center gap-12">
           <span className="text-2xl font-black tracking-tighter text-on-surface uppercase">Playground</span>
           <div className="hidden md:flex items-center bg-surface-container-lowest p-1 rounded-full border border-outline-variant/15">
@@ -139,6 +138,6 @@ export default function Home() {
       <button className="fixed bottom-8 right-[340px] w-14 h-14 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-40">
         <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>add</span>
       </button>
-    </>
+    </div>
   );
 }
