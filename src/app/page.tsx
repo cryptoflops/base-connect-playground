@@ -29,7 +29,20 @@ export default function Home() {
   const activeNetworkId = caipNetwork?.id?.split(':')[1];
   const activeNet = networks.find(n => n.id.toString() === activeNetworkId) || networks[0];
 
-  useEffect(() => setMounted(true), []);
+  const themeMap: Record<number, string> = {
+    8453: 'base',
+    42220: 'celo',
+    10: 'optimism',
+    42161: 'arbitrum'
+  };
+  
+  const themeName = themeMap[activeNet.id] || 'base';
+
+  useEffect(() => {
+    setMounted(true);
+    document.documentElement.setAttribute('data-theme', themeName);
+  }, [themeName]);
+
   if (!mounted) return null;
 
   return (
