@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <div className={`theme-${themeName} min-h-screen w-full`}>
-      <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-3xl flex justify-between items-center px-8 h-20 max-w-[1920px] mx-auto border-b border-outline-variant/5">
+      <nav className="fixed top-0 w-full z-50 bg-background-80 backdrop-blur-3xl flex justify-between items-center px-8 h-20 max-w-[1920px] mx-auto border-b border-outline-variant/5">
         <div className="flex items-center gap-12">
           <span className="text-2xl font-black tracking-tighter text-on-surface uppercase">Playground</span>
           <div className="hidden md:flex items-center bg-surface-container-lowest p-1 rounded-full border border-outline-variant/15">
@@ -88,7 +88,7 @@ export default function Home() {
       <main className="pt-24 min-h-screen flex">
         <section className="flex-1 px-8 pb-20 max-w-5xl">
           <div className="mb-16 mt-8 relative">
-            <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary-container/10 blur-[120px] rounded-full pointer-events-none"></div>
+            <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary-container-glow blur-[120px] rounded-full pointer-events-none"></div>
             <h1 className="text-[3.5rem] font-bold tracking-tight leading-none mb-4">{activeNet.name} Network</h1>
             <p className="text-on-surface-variant text-[1.125rem] max-w-2xl leading-relaxed">
               A premium environment for multi-chain development. Execute cross-contract logic and manage state with millisecond precision.

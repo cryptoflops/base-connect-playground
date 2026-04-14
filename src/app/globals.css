@@ -5,31 +5,48 @@
 @layer base {
   :root {
     color-scheme: dark;
-    --primary-container: 0 0 255;
-    --background: 19 19 19;
-    --surface-container-lowest: 14 14 14;
-    --on-primary-container: 255 255 255;
+    --primary-container: #0000FF;
+    --primary-container-glow: rgba(0, 0, 255, 0.1);
+    --background: #131313;
+    --background-80: rgba(19, 19, 19, 0.8);
+    --surface-container-lowest: #0E0E0E;
+    --on-primary-container: #FFFFFF;
+  }
+  
+  .theme-base {
+    --primary-container: #0000FF;
+    --primary-container-glow: rgba(0, 0, 255, 0.1);
+    --background: #131313;
+    --background-80: rgba(19, 19, 19, 0.8);
+    --surface-container-lowest: #0E0E0E;
+    --on-primary-container: #FFFFFF;
   }
   
   .theme-celo {
-    --primary-container: 252 255 82;
-    --background: 27 28 27;
-    --surface-container-lowest: 20 21 20;
-    --on-primary-container: 0 0 0;
+    --primary-container: #FCFF52;
+    --primary-container-glow: rgba(252, 255, 82, 0.1);
+    --background: #1B1C1B;
+    --background-80: rgba(27, 28, 27, 0.8);
+    --surface-container-lowest: #141514;
+    --on-primary-container: #000000;
   }
 
   .theme-optimism {
-    --primary-container: 255 4 33;
-    --background: 19 19 19;
-    --surface-container-lowest: 14 14 14;
-    --on-primary-container: 255 255 255;
+    --primary-container: #FF0421;
+    --primary-container-glow: rgba(255, 4, 33, 0.1);
+    --background: #131313;
+    --background-80: rgba(19, 19, 19, 0.8);
+    --surface-container-lowest: #0E0E0E;
+    --on-primary-container: #FFFFFF;
   }
 
   .theme-arbitrum {
-    --primary-container: 18 170 255;
-    --background: 11 28 49;
-    --surface-container-lowest: 7 20 38;
-    --on-primary-container: 0 0 0;
+    --primary-container: #12AAFF;
+    --primary-container-glow: rgba(18, 170, 255, 0.1);
+    --background: #0B1C31;
+    --background-80: rgba(11, 28, 49, 0.8);
+    --surface-container-lowest: #071426;
+    --on-primary-container: #000000;
   }
   
   body {
