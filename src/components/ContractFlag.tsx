@@ -56,7 +56,7 @@ export function ContractFlag() {
   };
 
   return (
-    <div className="bg-surface-container-lowest p-8 rounded-xl border-l-2 border-primary-container h-full">
+    <div className="chain-surface-lowest p-8 rounded-xl border-l-2 accent-border h-full">
       <label className="text-[0.6875rem] uppercase tracking-widest text-on-surface-variant mb-4 block">State Controls</label>
       <h3 className="text-2xl font-bold mb-6">Flag</h3>
       <div className="flex items-center justify-between">
@@ -64,7 +64,7 @@ export function ContractFlag() {
         <button
           onClick={handleToggle}
           disabled={!isConnected || isPending}
-          className={`w-16 h-8 rounded-full relative p-1 transition-all disabled:opacity-50 ${flagValue ? 'bg-primary-container' : 'bg-surface-variant'}`}
+          className={`w-16 h-8 rounded-full relative p-1 transition-all disabled:opacity-50 ${flagValue ? 'accent-bg' : 'bg-surface-variant'}`}
         >
           <span className={`absolute top-1 w-6 h-6 bg-white rounded-full transition-all ${flagValue ? 'right-1' : 'left-1'}`}></span>
         </button>

@@ -63,7 +63,7 @@ export function ContractEventStream() {
       className={`bg-surface-container p-6 rounded-lg hover:bg-surface-container-high transition-all flex items-center justify-between ${isConnected && !isPending ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}
     >
       <div className="flex items-center gap-4">
-        <span className="material-symbols-outlined text-primary-container">sensors</span>
+        <span className="material-symbols-outlined accent-text">sensors</span>
         <span className="font-bold">Event Stream</span>
       </div>
       <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>

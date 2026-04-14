@@ -2,61 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Default chain variables — overridden at runtime via inline styles */
 :root {
   color-scheme: dark;
-  --primary-container: #0000FF;
-  --primary-container-glow: rgba(0, 0, 255, 0.1);
-  --background: #131313;
-  --background-80: rgba(19, 19, 19, 0.8);
-  --surface-container-lowest: #0E0E0E;
-  --on-primary-container: #FFFFFF;
-}
-
-.theme-base {
-  --primary-container: #0000FF;
-  --primary-container-glow: rgba(0, 0, 255, 0.1);
-  --background: #131313;
-  --background-80: rgba(19, 19, 19, 0.8);
-  --surface-container-lowest: #0E0E0E;
-  --on-primary-container: #FFFFFF;
-}
-
-.theme-celo {
-  --primary-container: #FCFF52;
-  --primary-container-glow: rgba(252, 255, 82, 0.1);
-  --background: #1B1C1B;
-  --background-80: rgba(27, 28, 27, 0.8);
-  --surface-container-lowest: #141514;
-  --on-primary-container: #000000;
-}
-
-.theme-optimism {
-  --primary-container: #FF0421;
-  --primary-container-glow: rgba(255, 4, 33, 0.1);
-  --background: #131313;
-  --background-80: rgba(19, 19, 19, 0.8);
-  --surface-container-lowest: #0E0E0E;
-  --on-primary-container: #FFFFFF;
-}
-
-.theme-arbitrum {
-  --primary-container: #12AAFF;
-  --primary-container-glow: rgba(18, 170, 255, 0.1);
-  --background: #0B1C31;
-  --background-80: rgba(11, 28, 49, 0.8);
-  --surface-container-lowest: #071426;
-  --on-primary-container: #000000;
+  --chain-accent: #0000FF;
+  --chain-accent-glow: rgba(0, 0, 255, 0.1);
+  --chain-bg: #050505;
+  --chain-bg-80: rgba(5, 5, 5, 0.8);
+  --chain-surface-lowest: #0c0e17;
+  --chain-on-accent: #ffffff;
 }
 
 @layer base {
-  
   body {
-    @apply antialiased bg-background text-on-surface font-sans;
+    @apply antialiased font-sans;
+    background-color: var(--chain-bg);
+    color: #e5e2e1;
   }
   
   ::selection {
-    background-color: theme('colors.primary-container');
-    color: white;
+    background-color: var(--chain-accent);
+    color: var(--chain-on-accent);
   }
 
   .material-symbols-outlined { 
@@ -73,5 +39,31 @@
   
   .no-scrollbar::-webkit-scrollbar { 
     display: none; 
+  }
+
+  /* Runtime-aware accent utilities */
+  .accent-bg {
+    background-color: var(--chain-accent);
+  }
+  .accent-text {
+    color: var(--chain-accent);
+  }
+  .accent-border {
+    border-color: var(--chain-accent);
+  }
+  .accent-on-text {
+    color: var(--chain-on-accent);
+  }
+  .accent-glow-bg {
+    background-color: var(--chain-accent-glow);
+  }
+  .chain-bg {
+    background-color: var(--chain-bg);
+  }
+  .chain-bg-80 {
+    background-color: var(--chain-bg-80);
+  }
+  .chain-surface-lowest {
+    background-color: var(--chain-surface-lowest);
   }
 }

@@ -15,7 +15,7 @@ export function LogPanel() {
       <div className="p-6 border-b border-outline-variant/10">
         <div className="flex items-center justify-between mb-2">
           <h2 className="font-['Inter'] font-bold text-lg">Activity Log</h2>
-          <span className="w-2 h-2 rounded-full bg-[#0000FF] animate-pulse"></span>
+          <span className="w-2 h-2 rounded-full accent-bg animate-pulse"></span>
         </div>
         <p className="text-xs text-[#C5C4DB] opacity-60">Live Chain Stream (Base Mainnet)</p>
       </div>
@@ -23,21 +23,21 @@ export function LogPanel() {
       <div className="flex border-b border-outline-variant/10">
         <button
           onClick={() => setFilter('all')}
-          className={`flex-1 py-4 text-xs flex flex-col items-center gap-1 transition-opacity ${filter === 'all' ? 'font-bold text-on-surface border-b-2 border-primary-container' : 'font-medium text-[#C5C4DB] opacity-60 hover:opacity-100'}`}
+          className={`flex-1 py-4 text-xs flex flex-col items-center gap-1 transition-opacity ${filter === 'all' ? 'font-bold text-on-surface border-b-2 accent-border' : 'font-medium text-[#C5C4DB] opacity-60 hover:opacity-100'}`}
         >
           <span className="material-symbols-outlined text-[18px]">terminal</span>
           Logs
         </button>
         <button
           onClick={() => setFilter('tx')}
-          className={`flex-1 py-4 text-xs flex flex-col items-center gap-1 transition-opacity ${filter === 'tx' ? 'font-bold text-on-surface border-b-2 border-primary-container' : 'font-medium text-[#C5C4DB] opacity-60 hover:opacity-100'}`}
+          className={`flex-1 py-4 text-xs flex flex-col items-center gap-1 transition-opacity ${filter === 'tx' ? 'font-bold text-on-surface border-b-2 accent-border' : 'font-medium text-[#C5C4DB] opacity-60 hover:opacity-100'}`}
         >
           <span className="material-symbols-outlined text-[18px]">swap_horiz</span>
           TXs
         </button>
         <button
           onClick={() => setFilter('error')}
-          className={`flex-1 py-4 text-xs flex flex-col items-center gap-1 transition-opacity ${filter === 'error' ? 'font-bold text-on-surface border-b-2 border-primary-container' : 'font-medium text-[#C5C4DB] opacity-60 hover:opacity-100'}`}
+          className={`flex-1 py-4 text-xs flex flex-col items-center gap-1 transition-opacity ${filter === 'error' ? 'font-bold text-on-surface border-b-2 accent-border' : 'font-medium text-[#C5C4DB] opacity-60 hover:opacity-100'}`}
         >
           <span className="material-symbols-outlined text-[18px]">error_outline</span>
           Errors
@@ -63,7 +63,7 @@ export function LogPanel() {
       <div className="p-4 border-t border-outline-variant/10">
         <button
           onClick={() => dispatch({ type: 'CLEAR_LOGS' })}
-          className="w-full bg-surface-container-high text-xs font-bold py-3 rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-all"
+          className="w-full bg-surface-container-high text-xs font-bold py-3 rounded-lg hover:accent-bg hover:accent-on-text transition-all"
         >
           Clear Terminal
         </button>
@@ -78,7 +78,7 @@ function LogCard({ log }: { log: LogEntry }) {
   const getBadgeColor = () => {
     switch (log.type) {
       case 'error': return 'bg-error-container/20 border-error border-l-2';
-      case 'tx': return 'bg-surface-container border-primary-container border-l-2';
+      case 'tx': return 'bg-surface-container accent-border border-l-2';
       default: return 'bg-surface-container opacity-80';
     }
   };
@@ -86,7 +86,7 @@ function LogCard({ log }: { log: LogEntry }) {
   const getLabelColor = () => {
     switch (log.type) {
       case 'error': return 'text-error';
-      case 'tx': return 'text-primary-container';
+      case 'tx': return 'accent-text';
       default: return 'text-tertiary';
     }
   }

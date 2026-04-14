@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 import { useAppKitNetwork } from '@reown/appkit/react';
 
@@ -17,8 +17,8 @@ import { LogPanel } from '@/components/LogPanel';
 import AppKitButton from '@/components/AppKitButton';
 import AppKitNetworkButton from '@/components/AppKitNetworkButton';
 
-// Re-using the viem Chain definitions structurally compatible with AppKit
 import { networks } from '@/config';
+import { chainThemes, defaultTheme } from '@/lib/themes';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -29,14 +29,11 @@ export default function Home() {
   const activeNetworkId = caipNetwork?.id?.split(':')[1];
   const activeNet = networks.find(n => n.id.toString() === activeNetworkId) || networks[0];
 
-  const themeMap: Record<number, string> = {
-    8453: 'theme-base',
-    42220: 'theme-celo',
-    10: 'theme-optimism',
-    42161: 'theme-arbitrum'
-  };
-  
-  const themeName = themeMap[Number(activeNet.id)] || 'theme-base';
+  // Get the theme for the current chain, injected as inline CSS custom properties
+  const theme = useMemo(
+    () => chainThemes[Number(activeNet.id)] || defaultTheme,
+    [activeNet.id]
+  );
 
   useEffect(() => {
     setMounted(true);
@@ -45,11 +42,13 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className={`${themeName} min-h-screen w-full`}>
-      <nav className="fixed top-0 w-full z-50 bg-background-80 backdrop-blur-3xl flex justify-between items-center px-8 h-20 max-w-[1920px] mx-auto border-b border-outline-variant/5">
+    <div className="min-h-screen w-full" style={theme as React.CSSProperties}>
+      <nav
+        className="fixed top-0 w-full z-50 chain-bg-80 backdrop-blur-3xl flex justify-between items-center px-8 h-20 max-w-[1920px] mx-auto border-b border-outline-variant/5"
+      >
         <div className="flex items-center gap-12">
           <span className="text-2xl font-black tracking-tighter text-on-surface uppercase">Playground</span>
-          <div className="hidden md:flex items-center bg-surface-container-lowest p-1 rounded-full border border-outline-variant/15">
+          <div className="hidden md:flex items-center chain-surface-lowest p-1 rounded-full border border-outline-variant/15">
             {networks.map((net) => {
               const isActive = activeNet.id === net.id;
               return (
@@ -58,7 +57,7 @@ export default function Home() {
                   onClick={() => switchNetwork(net as any)}
                   className={`px-4 py-1.5 rounded-full text-[0.875rem] transition-all flex items-center gap-2 ${
                     isActive 
-                      ? 'font-bold bg-primary-container text-on-primary-container' 
+                      ? 'font-bold accent-bg accent-on-text' 
                       : 'font-medium text-on-surface-variant hover:text-on-surface'
                   }`}
                 >
@@ -71,7 +70,7 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-6">
           <div className="hidden lg:flex items-center gap-8">
-            <a className="text-on-surface border-b-2 border-primary-container pb-1 font-bold tracking-tight" href="#">Docs</a>
+            <a className="text-on-surface accent-border border-b-2 pb-1 font-bold tracking-tight" href="#">Docs</a>
             <a className="text-[#C5C4DB] hover:text-on-surface transition-colors font-bold tracking-tight" href="#">Contracts</a>
             <a className="text-[#C5C4DB] hover:text-on-surface transition-colors font-bold tracking-tight" href="#">Security</a>
             <a className="text-[#C5C4DB] hover:text-on-surface transition-colors font-bold tracking-tight" href="#">Explorer</a>
@@ -88,7 +87,7 @@ export default function Home() {
       <main className="pt-24 min-h-screen flex">
         <section className="flex-1 px-8 pb-20 max-w-5xl">
           <div className="mb-16 mt-8 relative">
-            <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary-container-glow blur-[120px] rounded-full pointer-events-none"></div>
+            <div className="absolute -top-24 -left-24 w-96 h-96 accent-glow-bg blur-[120px] rounded-full pointer-events-none"></div>
             <h1 className="text-[3.5rem] font-bold tracking-tight leading-none mb-4">{activeNet.name} Network</h1>
             <p className="text-on-surface-variant text-[1.125rem] max-w-2xl leading-relaxed">
               A premium environment for multi-chain development. Execute cross-contract logic and manage state with millisecond precision.
@@ -130,12 +129,12 @@ export default function Home() {
           </footer>
         </section>
 
-        <aside className="fixed right-0 top-20 flex flex-col h-[calc(100vh-80px)] border-l border-[#454558]/15 bg-surface-container-lowest w-80">
+        <aside className="fixed right-0 top-20 flex flex-col h-[calc(100vh-80px)] border-l border-[#454558]/15 chain-surface-lowest w-80">
           <LogPanel />
         </aside>
       </main>
 
-      <button className="fixed bottom-8 right-[340px] w-14 h-14 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-40">
+      <button className="fixed bottom-8 right-[340px] w-14 h-14 accent-bg accent-on-text rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-40">
         <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>add</span>
       </button>
     </div>

@@ -51,7 +51,7 @@ export function ContractCounter() {
   };
 
   return (
-    <div className="bg-surface-container-lowest p-8 rounded-xl border-l-2 border-primary-container h-full">
+    <div className="chain-surface-lowest p-8 rounded-xl border-l-2 accent-border h-full">
       <label className="text-[0.6875rem] uppercase tracking-widest text-on-surface-variant mb-4 block">State Controls</label>
       <h3 className="text-2xl font-bold mb-6">Counter</h3>
       <div className="flex items-center gap-6">

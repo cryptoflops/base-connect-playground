@@ -132,7 +132,7 @@ export function PingAll() {
       <button
         onClick={run}
         disabled={!isConnected || isPending}
-        className="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-bold flex items-center gap-3 hover:scale-[1.02] transition-transform disabled:opacity-50"
+        className="accent-bg accent-on-text px-8 py-4 rounded-lg font-bold flex items-center gap-3 hover:scale-[1.02] transition-transform disabled:opacity-50"
       >
         <span className="material-symbols-outlined">rocket_launch</span>
         {isPending ? 'Executing...' : 'Run Ping All'}
