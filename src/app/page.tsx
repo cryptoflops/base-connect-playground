@@ -30,13 +30,13 @@ export default function Home() {
   const activeNet = networks.find(n => n.id.toString() === activeNetworkId) || networks[0];
 
   const themeMap: Record<number, string> = {
-    8453: 'base',
-    42220: 'celo',
-    10: 'optimism',
-    42161: 'arbitrum'
+    8453: 'theme-base',
+    42220: 'theme-celo',
+    10: 'theme-optimism',
+    42161: 'theme-arbitrum'
   };
   
-  const themeName = themeMap[Number(activeNet.id)] || 'base';
+  const themeName = themeMap[Number(activeNet.id)] || 'theme-base';
 
   useEffect(() => {
     setMounted(true);
@@ -45,7 +45,7 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className={`theme-${themeName} min-h-screen w-full`}>
+    <div className={`${themeName} min-h-screen w-full`}>
       <nav className="fixed top-0 w-full z-50 bg-background-80 backdrop-blur-3xl flex justify-between items-center px-8 h-20 max-w-[1920px] mx-auto border-b border-outline-variant/5">
         <div className="flex items-center gap-12">
           <span className="text-2xl font-black tracking-tighter text-on-surface uppercase">Playground</span>
