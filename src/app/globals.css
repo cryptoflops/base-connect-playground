@@ -66,4 +66,9 @@
   .chain-surface-lowest {
     background-color: var(--chain-surface-lowest);
   }
+
+  .hover-accent-bg:hover {
+    background-color: var(--chain-accent);
+    color: var(--chain-on-accent);
+  }
 }

@@ -63,7 +63,7 @@ export function LogPanel() {
       <div className="p-4 border-t border-outline-variant/10">
         <button
           onClick={() => dispatch({ type: 'CLEAR_LOGS' })}
-          className="w-full bg-surface-container-high text-xs font-bold py-3 rounded-lg hover:accent-bg hover:accent-on-text transition-all"
+          className="w-full bg-surface-container-high text-xs font-bold py-3 rounded-lg transition-all hover-accent-bg"
         >
           Clear Terminal
         </button>
