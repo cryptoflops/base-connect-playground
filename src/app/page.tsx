@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { useChainId, useSwitchChain } from 'wagmi';
+import { useAppKitNetwork } from '@reown/appkit/react';
 
 import { ContractCounter } from '@/components/ContractCounter';
 import { ContractStorage } from '@/components/ContractStorage';
@@ -17,18 +17,17 @@ import { LogPanel } from '@/components/LogPanel';
 import AppKitButton from '@/components/AppKitButton';
 import AppKitNetworkButton from '@/components/AppKitNetworkButton';
 
-const NETWORKS = [
-  { id: 8453, name: 'Base' },
-  { id: 42220, name: 'Celo' },
-  { id: 10, name: 'Optimism' },
-  { id: 42161, name: 'Arbitrum' },
-];
+// Re-using the viem Chain definitions structurally compatible with AppKit
+import { networks } from '@/config';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   
-  const chainId = useChainId();
-  const { switchChain } = useSwitchChain();
+  const { caipNetwork, switchNetwork } = useAppKitNetwork();
+
+  // Find active network cleanly, fallback to Base
+  const activeNetworkId = caipNetwork?.id?.split(':')[1];
+  const activeNet = networks.find(n => n.id.toString() === activeNetworkId) || networks[0];
 
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
@@ -39,12 +38,12 @@ export default function Home() {
         <div className="flex items-center gap-12">
           <span className="text-2xl font-black tracking-tighter text-on-surface uppercase">Playground</span>
           <div className="hidden md:flex items-center bg-surface-container-lowest p-1 rounded-full border border-outline-variant/15">
-            {NETWORKS.map((net) => {
-              const isActive = chainId === net.id;
+            {networks.map((net) => {
+              const isActive = activeNet.id === net.id;
               return (
                 <button
                   key={net.id}
-                  onClick={() => switchChain({ chainId: net.id })}
+                  onClick={() => switchNetwork(net as any)}
                   className={`px-4 py-1.5 rounded-full text-[0.875rem] transition-all flex items-center gap-2 ${
                     isActive 
                       ? 'font-bold bg-primary-container text-white' 
@@ -78,7 +77,7 @@ export default function Home() {
         <section className="flex-1 px-8 pb-20 max-w-5xl">
           <div className="mb-16 mt-8 relative">
             <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary-container/10 blur-[120px] rounded-full pointer-events-none"></div>
-            <h1 className="text-[3.5rem] font-bold tracking-tight leading-none mb-4">Base Network</h1>
+            <h1 className="text-[3.5rem] font-bold tracking-tight leading-none mb-4">{activeNet.name} Network</h1>
             <p className="text-on-surface-variant text-[1.125rem] max-w-2xl leading-relaxed">
               A premium environment for multi-chain development. Execute cross-contract logic and manage state with millisecond precision.
             </p>
