@@ -46,7 +46,7 @@ export default function Home() {
                   onClick={() => switchNetwork(net as any)}
                   className={`px-4 py-1.5 rounded-full text-[0.875rem] transition-all flex items-center gap-2 ${
                     isActive 
-                      ? 'font-bold bg-primary-container text-white' 
+                      ? 'font-bold bg-primary-container text-on-primary-container' 
                       : 'font-medium text-on-surface-variant hover:text-on-surface'
                   }`}
                 >
@@ -123,7 +123,7 @@ export default function Home() {
         </aside>
       </main>
 
-      <button className="fixed bottom-8 right-[340px] w-14 h-14 bg-primary-container text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-40">
+      <button className="fixed bottom-8 right-[340px] w-14 h-14 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-40">
         <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>add</span>
       </button>
     </>
