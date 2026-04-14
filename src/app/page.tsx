@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { useChainId, useSwitchChain } from 'wagmi';
+
 import { ContractCounter } from '@/components/ContractCounter';
 import { ContractStorage } from '@/components/ContractStorage';
 import { ContractFlag } from '@/components/ContractFlag';
@@ -15,8 +17,18 @@ import { LogPanel } from '@/components/LogPanel';
 import AppKitButton from '@/components/AppKitButton';
 import AppKitNetworkButton from '@/components/AppKitNetworkButton';
 
+const NETWORKS = [
+  { id: 8453, name: 'Base' },
+  { id: 42220, name: 'Celo' },
+  { id: 10, name: 'Optimism' },
+  { id: 42161, name: 'Arbitrum' },
+];
+
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  
+  const chainId = useChainId();
+  const { switchChain } = useSwitchChain();
 
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
@@ -27,12 +39,23 @@ export default function Home() {
         <div className="flex items-center gap-12">
           <span className="text-2xl font-black tracking-tighter text-on-surface uppercase">Playground</span>
           <div className="hidden md:flex items-center bg-surface-container-lowest p-1 rounded-full border border-outline-variant/15">
-            <button className="px-4 py-1.5 rounded-full text-[0.875rem] font-bold bg-primary-container text-white flex items-center gap-2 transition-all">
-              <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_#fff]"></span> Base
-            </button>
-            <button className="px-4 py-1.5 rounded-full text-[0.875rem] font-medium text-on-surface-variant hover:text-on-surface transition-colors">Celo</button>
-            <button className="px-4 py-1.5 rounded-full text-[0.875rem] font-medium text-on-surface-variant hover:text-on-surface transition-colors">Optimism</button>
-            <button className="px-4 py-1.5 rounded-full text-[0.875rem] font-medium text-on-surface-variant hover:text-on-surface transition-colors">Arbitrum</button>
+            {NETWORKS.map((net) => {
+              const isActive = chainId === net.id;
+              return (
+                <button
+                  key={net.id}
+                  onClick={() => switchChain({ chainId: net.id })}
+                  className={`px-4 py-1.5 rounded-full text-[0.875rem] transition-all flex items-center gap-2 ${
+                    isActive 
+                      ? 'font-bold bg-primary-container text-white' 
+                      : 'font-medium text-on-surface-variant hover:text-on-surface'
+                  }`}
+                >
+                  {isActive && <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_#fff]"></span>}
+                  {net.name}
+                </button>
+              );
+            })}
           </div>
         </div>
         <div className="flex items-center gap-6">
