@@ -12,12 +12,24 @@ export function LogPanel() {
 
   return (
     <>
-      <div className="p-6 border-b border-outline-variant/10">
+      <div className="p-6 border-b border-outline-variant/10 bg-surface-container-low">
         <div className="flex items-center justify-between mb-2">
-          <h2 className="font-['Inter'] font-bold text-lg">Activity Log</h2>
-          <span className="w-2 h-2 rounded-full accent-bg animate-pulse"></span>
+          <h3 className="text-sm font-bold text-white uppercase tracking-widest">Network Terminal</h3>
+          <span className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full accent-bg animate-pulse"></span>
+            <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Live Feed</span>
+          </span>
         </div>
-        <p className="text-xs text-[#C5C4DB] opacity-60">Live Chain Stream (Base Mainnet)</p>
+        <div className="flex gap-4">
+          <div className="flex-1 bg-[#050505] p-2 rounded border border-outline-variant/10">
+            <div className="text-[9px] text-on-surface-variant uppercase tracking-tighter">Event Count</div>
+            <div className="text-sm font-mono text-white">{logs.length}</div>
+          </div>
+          <div className="flex-1 bg-[#050505] p-2 rounded border border-outline-variant/10">
+            <div className="text-[9px] text-on-surface-variant uppercase tracking-tighter">Network</div>
+            <div className="text-sm font-mono accent-text">Live</div>
+          </div>
+        </div>
       </div>
 
       <div className="flex border-b border-outline-variant/10">
@@ -44,7 +56,7 @@ export function LogPanel() {
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 font-mono text-[0.75rem]">
+      <div className="flex-1 overflow-y-auto custom-terminal-scrollbar p-4 space-y-3 font-mono text-[11px] leading-relaxed">
         {logs.length === 0 ? (
           <div className="flex h-full items-center justify-center text-on-surface-variant font-sans text-center">
             <p>No events recorded yet. Connect a wallet and trigger an action.</p>
@@ -104,7 +116,7 @@ function LogCard({ log }: { log: LogEntry }) {
           href={`https://sepolia.basescan.org/tx/${log.txHash}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-primary-fixed mt-1 block truncate hover:underline"
+          className="accent-text mt-1 block truncate hover:underline"
         >
           {log.txHash}
         </a>

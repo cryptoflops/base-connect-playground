@@ -71,4 +71,19 @@
     background-color: var(--chain-accent);
     color: var(--chain-on-accent);
   }
+
+  .custom-terminal-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  .custom-terminal-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-terminal-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  .custom-terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
 }
