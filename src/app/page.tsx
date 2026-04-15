@@ -57,9 +57,9 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-6">
           <div className="hidden lg:flex items-center gap-8 text-sm">
-            <a className="text-on-surface accent-border border-b-2 pb-1 font-bold tracking-tight" href="#">Docs</a>
-            <a className="text-[#C5C4DB] hover:text-on-surface transition-colors font-bold tracking-tight" href="#">Contracts</a>
-            <a className="text-[#C5C4DB] hover:text-on-surface transition-colors font-bold tracking-tight" href="#">Security</a>
+            <a className="text-on-surface hover:accent-text border-b-2 border-transparent hover:accent-border pb-1 font-bold tracking-tight transition-colors" href="#">Docs</a>
+            <a className="text-on-surface hover:accent-text border-b-2 border-transparent hover:accent-border pb-1 font-bold tracking-tight transition-colors" href="#">Contracts</a>
+            <a className="text-on-surface hover:accent-text border-b-2 border-transparent hover:accent-border pb-1 font-bold tracking-tight transition-colors" href="#">Security</a>
           </div>
           <div className="flex items-center gap-4 ml-4">
             <AppKitNetworkButton />
