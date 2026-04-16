@@ -33,82 +33,103 @@ export function PingAll() {
     setIsPending(true);
 
     try {
-      const hashes = [];
+      const hashes: string[] = [];
+      const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-      hashes.push(
-        await writeContractAsync({
-          address: addresses.counter as `0x${string}`,
-          abi: BUILDER_COUNTER_ABI,
-          functionName: 'inc',
-          chainId,
-        })
-      );
+      // 1. Counter
+      const h1 = await writeContractAsync({
+        address: addresses.counter as `0x${string}`,
+        abi: BUILDER_COUNTER_ABI,
+        functionName: 'inc',
+        chainId,
+        gas: BigInt(150000),
+      });
+      hashes.push(h1);
+      logDispatch({ type: 'ADD_LOG', payload: { type: 'info', title: 'Transaction 1/7', message: 'Counter increment sent.' } });
+      await delay(2000);
 
-      hashes.push(
-        await writeContractAsync({
-          address: addresses.flag as `0x${string}`,
-          abi: BUILDER_FLAG_ABI,
-          functionName: 'toggle',
-          chainId,
-        })
-      );
+      // 2. Flag
+      const h2 = await writeContractAsync({
+        address: addresses.flag as `0x${string}`,
+        abi: BUILDER_FLAG_ABI,
+        functionName: 'toggle',
+        chainId,
+        gas: BigInt(150000),
+      });
+      hashes.push(h2);
+      logDispatch({ type: 'ADD_LOG', payload: { type: 'info', title: 'Transaction 2/7', message: 'Flag toggle sent.' } });
+      await delay(2000);
 
-      hashes.push(
-        await writeContractAsync({
-          address: addresses.timestamp as `0x${string}`,
-          abi: BUILDER_TIMESTAMP_ABI,
-          functionName: 'ping',
-          chainId,
-        })
-      );
+      // 3. Timestamp
+      const h3 = await writeContractAsync({
+        address: addresses.timestamp as `0x${string}`,
+        abi: BUILDER_TIMESTAMP_ABI,
+        functionName: 'ping',
+        chainId,
+        gas: BigInt(150000),
+      });
+      hashes.push(h3);
+      logDispatch({ type: 'ADD_LOG', payload: { type: 'info', title: 'Transaction 3/7', message: 'Timestamp ping sent.' } });
+      await delay(2000);
 
-      hashes.push(
-        await writeContractAsync({
-          address: addresses.storage as `0x${string}`,
-          abi: BUILDER_STORAGE_ABI,
-          functionName: 'store',
-          args: [`PingAll from ${address}`],
-          chainId,
-        })
-      );
+      // 4. Storage
+      const h4 = await writeContractAsync({
+        address: addresses.storage as `0x${string}`,
+        abi: BUILDER_STORAGE_ABI,
+        functionName: 'store',
+        args: [`PingAll from ${address}`],
+        chainId,
+        gas: BigInt(200000),
+      });
+      hashes.push(h4);
+      logDispatch({ type: 'ADD_LOG', payload: { type: 'info', title: 'Transaction 4/7', message: 'Storage update sent.' } });
+      await delay(2000);
 
-      hashes.push(
-        await writeContractAsync({
-          address: addresses.storageLog as `0x${string}`,
-          abi: BUILDER_STORAGE_LOG_ABI,
-          functionName: 'store',
-          args: [`PingAll from ${address}`],
-          chainId,
-        })
-      );
+      // 5. Storage Log
+      const h5 = await writeContractAsync({
+        address: addresses.storageLog as `0x${string}`,
+        abi: BUILDER_STORAGE_LOG_ABI,
+        functionName: 'store',
+        args: [`PingAll from ${address}`],
+        chainId,
+        gas: BigInt(200000),
+      });
+      hashes.push(h5);
+      logDispatch({ type: 'ADD_LOG', payload: { type: 'info', title: 'Transaction 5/7', message: 'Storage log sent.' } });
+      await delay(2000);
 
-      hashes.push(
-        await writeContractAsync({
-          address: addresses.eventStream as `0x${string}`,
-          abi: BUILDER_EVENT_STREAM_ABI,
-          functionName: 'push',
-          args: [`PingAll from ${address}`],
-          chainId,
-        })
-      );
+      // 6. Event Stream
+      const h6 = await writeContractAsync({
+        address: addresses.eventStream as `0x${string}`,
+        abi: BUILDER_EVENT_STREAM_ABI,
+        functionName: 'push',
+        args: [`PingAll from ${address}`],
+        chainId,
+        gas: BigInt(150000),
+      });
+      hashes.push(h6);
+      logDispatch({ type: 'ADD_LOG', payload: { type: 'info', title: 'Transaction 6/7', message: 'Event stream pushed.' } });
+      await delay(2000);
 
-      hashes.push(
-        await writeContractAsync({
-          address: addresses.scoreTracker as `0x${string}`,
-          abi: BUILDER_SCORE_TRACKER_ABI,
-          functionName: 'increment',
-          args: [BigInt(1)],
-          chainId,
-        })
-      );
+      // 7. Score Tracker
+      const h7 = await writeContractAsync({
+        address: addresses.scoreTracker as `0x${string}`,
+        abi: BUILDER_SCORE_TRACKER_ABI,
+        functionName: 'increment',
+        args: [BigInt(1)],
+        chainId,
+        gas: BigInt(150000),
+      });
+      hashes.push(h7);
+      logDispatch({ type: 'ADD_LOG', payload: { type: 'info', title: 'Transaction 7/7', message: 'Score incremented.' } });
 
       logDispatch({
         type: 'ADD_LOG',
         payload: {
           type: 'tx',
-          title: 'Ping All Sequence Executed',
-          message: `Successfully executed 7 contract interactions.`,
-          txHash: hashes[hashes.length - 1] // just show last one as representative, or adjust LogPanel to handle multiple.
+          title: 'Ping All Sequence Completed',
+          message: `Successfully sent 7 contract interactions. Check your wallet/explorer for final status.`,
+          txHash: h7
         }
       });
     } catch (err: any) {
@@ -137,7 +158,7 @@ export function PingAll() {
         className="accent-bg accent-on-text px-8 py-4 rounded-lg font-bold flex items-center gap-3 hover:scale-[1.02] transition-transform disabled:opacity-50"
       >
         <span className="material-symbols-outlined">rocket_launch</span>
-        {isPending ? 'Executing...' : 'Run Ping All'}
+        {isPending ? 'Processing...' : 'Run Ping All'}
       </button>
     </div>
   );
