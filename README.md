@@ -84,22 +84,6 @@ The playground interacts with several verified contracts on Base Mainnet to demo
 - **Timestamp**: Recording block timestamps.
 - **Events**: monitoring contract events in real-time.
 
-## 🌟 Talent App & Celo Rewards
-
-This project is integrated with the [Talent App](https://talent.app) platform and participates in the **Celo Rewards Program**.
-
-### Project Verification
-The project's ownership is verified via a meta tag in the application's root layout.
-
-### Celo Rewards Contracts
-The following smart contracts on Celo are tracked for this project's on-chain activity and impact:
-
-1.  **BuilderCounter**: `0x4a7c27c936d3f414f31b74023288c49110fb60bb`
-2.  **BuilderFlag**: `0x1bb7b8a20b855eee4d1778195f2e44c693f0d39b`
-3.  **BuilderTimestamp**: `0x5ef690b84a23d96de7c1af8d4cf2e3aa8b0ca21a`
-4.  **BuilderStorage**: `0x2e5a1fe39a38dcb7631c6fba588f5cc0bb0f2e5c`
-5.  **BuilderStorageLog**: `0x23d97969cc73a4a0cb0c3ac0f8e66f8a9634e3a0`
-
 ## 🤝 Contributing
 
 Contributions are welcome. Please submit a Pull Request for any enhancements or bug fixes.

@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useAccount, useWriteContract } from 'wagmi';
-import { BUILDER_TIMESTAMP_ADDRESS, BUILDER_TIMESTAMP_ABI } from '@/lib/contracts';
+import { useBuilderAddresses, BUILDER_TIMESTAMP_ABI } from '@/lib/contracts';
 import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractTimestamp() {
   const { isConnected } = useAccount();
+  const addresses = useBuilderAddresses();
 
   const [localPing, setLocalPing] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);
@@ -27,7 +28,7 @@ export function ContractTimestamp() {
 
     try {
       const tx = await writeContractAsync({
-        address: BUILDER_TIMESTAMP_ADDRESS as `0x${string}`,
+        address: addresses.timestamp as `0x${string}`,
         abi: BUILDER_TIMESTAMP_ABI,
         functionName: 'ping',
       });

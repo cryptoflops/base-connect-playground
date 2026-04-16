@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useAccount, useWriteContract } from 'wagmi';
-import { BUILDER_COUNTER_ADDRESS, BUILDER_COUNTER_ABI } from '@/lib/contracts';
+import { useBuilderAddresses, BUILDER_COUNTER_ABI } from '@/lib/contracts';
 import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractCounter() {
   const { isConnected } = useAccount();
+  const addresses = useBuilderAddresses();
   const [isPending, setIsPending] = useState(false);
   const [mounted, setMounted] = useState(false);
   
@@ -22,7 +23,7 @@ export function ContractCounter() {
     setIsPending(true);
     try {
       const tx = await writeContractAsync({
-        address: BUILDER_COUNTER_ADDRESS as `0x${string}`,
+        address: addresses.counter as `0x${string}`,
         abi: BUILDER_COUNTER_ABI,
         functionName: 'inc',
       });

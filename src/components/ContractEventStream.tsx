@@ -2,14 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useAccount, useWriteContract } from 'wagmi';
-import {
-  BUILDER_EVENT_STREAM_ADDRESS,
-  BUILDER_EVENT_STREAM_ABI,
-} from '@/lib/contracts';
+import { useBuilderAddresses, BUILDER_EVENT_STREAM_ABI } from '@/lib/contracts';
 import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractEventStream() {
   const { isConnected } = useAccount();
+  const addresses = useBuilderAddresses();
 
   const [message, setMessage] = useState('');
   const [isPending, setIsPending] = useState(false);
@@ -27,7 +25,7 @@ export function ContractEventStream() {
     setIsPending(true);
     try {
       const tx = await writeContractAsync({
-        address: BUILDER_EVENT_STREAM_ADDRESS as `0x${string}`,
+        address: addresses.eventStream as `0x${string}`,
         abi: BUILDER_EVENT_STREAM_ABI,
         functionName: 'push',
         args: [message],

@@ -2,17 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { useAccount, useReadContract, useWriteContract } from 'wagmi';
-import {
-  BUILDER_SCORE_TRACKER_ADDRESS,
-  BUILDER_SCORE_TRACKER_ABI,
-} from '@/lib/contracts';
+import { useBuilderAddresses, BUILDER_SCORE_TRACKER_ABI } from '@/lib/contracts';
 import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractScoreTracker() {
   const { address, isConnected } = useAccount();
+  const addresses = useBuilderAddresses();
 
   const { data: score, refetch } = useReadContract({
-    address: BUILDER_SCORE_TRACKER_ADDRESS as `0x${string}`,
+    address: addresses.scoreTracker as `0x${string}`,
     abi: BUILDER_SCORE_TRACKER_ABI,
     functionName: 'getScore',
     args: address ? [address] : undefined,
@@ -38,10 +36,10 @@ export function ContractScoreTracker() {
 
     try {
       const tx = await writeContractAsync({
-        address: BUILDER_SCORE_TRACKER_ADDRESS as `0x${string}`,
+        address: addresses.scoreTracker as `0x${string}`,
         abi: BUILDER_SCORE_TRACKER_ABI,
         functionName: 'increment',
-        args: [n],
+        args: [BigInt(10)],
       });
       logDispatch({
         type: 'ADD_LOG',

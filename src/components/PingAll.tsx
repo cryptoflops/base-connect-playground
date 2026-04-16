@@ -4,25 +4,20 @@ import { useState, useEffect } from 'react';
 import { useAccount, useWriteContract } from 'wagmi';
 
 import {
-  BUILDER_COUNTER_ADDRESS,
+  useBuilderAddresses,
   BUILDER_COUNTER_ABI,
-  BUILDER_FLAG_ADDRESS,
   BUILDER_FLAG_ABI,
-  BUILDER_TIMESTAMP_ADDRESS,
   BUILDER_TIMESTAMP_ABI,
-  BUILDER_STORAGE_ADDRESS,
   BUILDER_STORAGE_ABI,
-  BUILDER_STORAGE_LOG_ADDRESS,
   BUILDER_STORAGE_LOG_ABI,
-  BUILDER_EVENT_STREAM_ADDRESS,
   BUILDER_EVENT_STREAM_ABI,
-  BUILDER_SCORE_TRACKER_ADDRESS,
   BUILDER_SCORE_TRACKER_ABI,
 } from '@/lib/contracts';
 import { useLogDispatch } from '@/context/LogContext';
 
 export function PingAll() {
   const { isConnected, address } = useAccount();
+  const addresses = useBuilderAddresses();
   const [isPending, setIsPending] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -33,7 +28,7 @@ export function PingAll() {
   if (!mounted) return null;
 
   const run = async () => {
-    if (!isConnected) return;
+    if (!isConnected || !address) return;
 
     setIsPending(true);
 
@@ -42,7 +37,7 @@ export function PingAll() {
 
       hashes.push(
         await writeContractAsync({
-          address: BUILDER_COUNTER_ADDRESS as `0x${string}`,
+          address: addresses.counter as `0x${string}`,
           abi: BUILDER_COUNTER_ABI,
           functionName: 'inc',
         })
@@ -50,7 +45,7 @@ export function PingAll() {
 
       hashes.push(
         await writeContractAsync({
-          address: BUILDER_FLAG_ADDRESS as `0x${string}`,
+          address: addresses.flag as `0x${string}`,
           abi: BUILDER_FLAG_ABI,
           functionName: 'toggle',
         })
@@ -58,7 +53,7 @@ export function PingAll() {
 
       hashes.push(
         await writeContractAsync({
-          address: BUILDER_TIMESTAMP_ADDRESS as `0x${string}`,
+          address: addresses.timestamp as `0x${string}`,
           abi: BUILDER_TIMESTAMP_ABI,
           functionName: 'ping',
         })
@@ -66,37 +61,37 @@ export function PingAll() {
 
       hashes.push(
         await writeContractAsync({
-          address: BUILDER_STORAGE_ADDRESS as `0x${string}`,
+          address: addresses.storage as `0x${string}`,
           abi: BUILDER_STORAGE_ABI,
           functionName: 'store',
-          args: [`PingAll from ${address ?? 'Unknown'}`],
+          args: [`PingAll from ${address}`],
         })
       );
 
       hashes.push(
         await writeContractAsync({
-          address: BUILDER_STORAGE_LOG_ADDRESS as `0x${string}`,
+          address: addresses.storageLog as `0x${string}`,
           abi: BUILDER_STORAGE_LOG_ABI,
           functionName: 'store',
-          args: [`PingAll @ ${new Date().toISOString()}`],
+          args: [`PingAll from ${address}`],
         })
       );
 
       hashes.push(
         await writeContractAsync({
-          address: BUILDER_EVENT_STREAM_ADDRESS as `0x${string}`,
+          address: addresses.eventStream as `0x${string}`,
           abi: BUILDER_EVENT_STREAM_ABI,
           functionName: 'push',
-          args: ['PingAll multi-contract event'],
+          args: [`PingAll from ${address}`],
         })
       );
 
       hashes.push(
         await writeContractAsync({
-          address: BUILDER_SCORE_TRACKER_ADDRESS as `0x${string}`,
+          address: addresses.scoreTracker as `0x${string}`,
           abi: BUILDER_SCORE_TRACKER_ABI,
           functionName: 'increment',
-          args: [1],
+          args: [BigInt(1)],
         })
       );
 

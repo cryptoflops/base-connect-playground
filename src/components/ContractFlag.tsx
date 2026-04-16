@@ -3,22 +3,23 @@
 import { useState, useEffect } from 'react';
 import { useAccount, useReadContract, useWriteContract } from 'wagmi';
 import { BUILDER_FLAG_ADDRESS, BUILDER_FLAG_ABI } from '@/lib/contracts';
+import { useBuilderAddresses, BUILDER_FLAG_ABI } from '@/lib/contracts';
 import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractFlag() {
   const { isConnected } = useAccount();
-
-  const { data: flagValue } = useReadContract({
-    address: BUILDER_FLAG_ADDRESS as `0x${string}`,
-    abi: BUILDER_FLAG_ABI,
-    functionName: 'flag',
-  });
-
-  const [isPending, setIsPending] = useState(false);
+  const addresses = useBuilderAddresses();
   const [mounted, setMounted] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   const logDispatch = useLogDispatch();
   const { writeContractAsync } = useWriteContract();
+
+  const { data: flagValue } = useReadContract({
+    address: addresses.flag as `0x${string}`,
+    abi: BUILDER_FLAG_ABI,
+    functionName: 'flag',
+  });
 
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
@@ -28,7 +29,7 @@ export function ContractFlag() {
     setIsPending(true);
     try {
       const tx = await writeContractAsync({
-        address: BUILDER_FLAG_ADDRESS as `0x${string}`,
+        address: addresses.flag as `0x${string}`,
         abi: BUILDER_FLAG_ABI,
         functionName: 'toggle',
       });

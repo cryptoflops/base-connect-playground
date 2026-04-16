@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useAccount, useWriteContract } from 'wagmi';
-import { BUILDER_STORAGE_ADDRESS, BUILDER_STORAGE_ABI } from '@/lib/contracts';
+import { useBuilderAddresses, BUILDER_STORAGE_ABI } from '@/lib/contracts';
 import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractStorage() {
   const { isConnected } = useAccount();
+  const addresses = useBuilderAddresses();
   const [value, setValue] = useState('');
   const [isPending, setIsPending] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -22,7 +23,7 @@ export function ContractStorage() {
     setIsPending(true);
     try {
       const tx = await writeContractAsync({
-        address: BUILDER_STORAGE_ADDRESS as `0x${string}`,
+        address: addresses.storage as `0x${string}`,
         abi: BUILDER_STORAGE_ABI,
         functionName: 'store',
         args: [value],
