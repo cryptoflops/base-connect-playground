@@ -48,9 +48,14 @@ export const BUILDER_STORAGE_LOG_ADDRESS = BUILDER_ADDRESSES[8453].storageLog;
 export const BUILDER_EVENT_STREAM_ADDRESS = BUILDER_ADDRESSES[8453].eventStream;
 export const BUILDER_SCORE_TRACKER_ADDRESS = BUILDER_ADDRESSES[8453].scoreTracker;
 
-import { useChainId } from 'wagmi';
+import { useAccount, useChainId } from 'wagmi';
 
 export function useBuilderAddresses() {
-  const chainId = useChainId();
+  const { chainId: accountChainId } = useAccount();
+  const activeChainId = useChainId();
+  
+  // Prioritize account's current chain if connected, otherwise use config chain
+  const chainId = accountChainId || activeChainId || 8453;
+  
   return BUILDER_ADDRESSES[chainId] || BUILDER_ADDRESSES[8453];
 }

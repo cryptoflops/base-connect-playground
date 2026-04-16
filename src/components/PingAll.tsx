@@ -34,12 +34,14 @@ export function PingAll() {
 
     try {
       const hashes = [];
+      const chainId = addresses === BUILDER_ADDRESSES[42220] ? 42220 : 8453;
 
       hashes.push(
         await writeContractAsync({
           address: addresses.counter as `0x${string}`,
           abi: BUILDER_COUNTER_ABI,
           functionName: 'inc',
+          chainId,
         })
       );
 
@@ -48,6 +50,7 @@ export function PingAll() {
           address: addresses.flag as `0x${string}`,
           abi: BUILDER_FLAG_ABI,
           functionName: 'toggle',
+          chainId,
         })
       );
 
@@ -56,6 +59,7 @@ export function PingAll() {
           address: addresses.timestamp as `0x${string}`,
           abi: BUILDER_TIMESTAMP_ABI,
           functionName: 'ping',
+          chainId,
         })
       );
 
@@ -65,6 +69,7 @@ export function PingAll() {
           abi: BUILDER_STORAGE_ABI,
           functionName: 'store',
           args: [`PingAll from ${address}`],
+          chainId,
         })
       );
 
@@ -74,6 +79,7 @@ export function PingAll() {
           abi: BUILDER_STORAGE_LOG_ABI,
           functionName: 'store',
           args: [`PingAll from ${address}`],
+          chainId,
         })
       );
 
@@ -83,6 +89,7 @@ export function PingAll() {
           abi: BUILDER_EVENT_STREAM_ABI,
           functionName: 'push',
           args: [`PingAll from ${address}`],
+          chainId,
         })
       );
 
@@ -92,6 +99,7 @@ export function PingAll() {
           abi: BUILDER_SCORE_TRACKER_ABI,
           functionName: 'increment',
           args: [BigInt(1)],
+          chainId,
         })
       );
 

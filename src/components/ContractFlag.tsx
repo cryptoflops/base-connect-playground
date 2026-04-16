@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useAccount, useReadContract, useWriteContract } from 'wagmi';
-import { BUILDER_FLAG_ADDRESS, BUILDER_FLAG_ABI } from '@/lib/contracts';
 import { useBuilderAddresses, BUILDER_FLAG_ABI } from '@/lib/contracts';
 import { useLogDispatch } from '@/context/LogContext';
 
