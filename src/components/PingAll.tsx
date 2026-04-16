@@ -17,7 +17,7 @@ import { useLogDispatch } from '@/context/LogContext';
 
 export function PingAll() {
   const { isConnected, address } = useAccount();
-  const addresses = useBuilderAddresses();
+  const { addresses, chainId } = useBuilderAddresses();
   const [isPending, setIsPending] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -34,7 +34,6 @@ export function PingAll() {
 
     try {
       const hashes = [];
-      const chainId = addresses === BUILDER_ADDRESSES[42220] ? 42220 : 8453;
 
       hashes.push(
         await writeContractAsync({

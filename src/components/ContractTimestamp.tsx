@@ -7,7 +7,7 @@ import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractTimestamp() {
   const { isConnected } = useAccount();
-  const addresses = useBuilderAddresses();
+  const { addresses } = useBuilderAddresses();
 
   const [localPing, setLocalPing] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);

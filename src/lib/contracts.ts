@@ -56,6 +56,11 @@ export function useBuilderAddresses() {
   
   // Prioritize account's current chain if connected, otherwise use config chain
   const chainId = accountChainId || activeChainId || 8453;
+  const isCelo = chainId === 42220;
+  const finalChainId = isCelo ? 42220 : 8453;
   
-  return BUILDER_ADDRESSES[chainId] || BUILDER_ADDRESSES[8453];
+  return {
+    addresses: BUILDER_ADDRESSES[finalChainId],
+    chainId: finalChainId
+  };
 }

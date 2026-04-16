@@ -7,7 +7,7 @@ import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractFlag() {
   const { isConnected } = useAccount();
-  const addresses = useBuilderAddresses();
+  const { addresses } = useBuilderAddresses();
   const [mounted, setMounted] = useState(false);
   const [isPending, setIsPending] = useState(false);
 

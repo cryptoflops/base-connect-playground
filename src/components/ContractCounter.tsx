@@ -7,7 +7,7 @@ import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractCounter() {
   const { isConnected } = useAccount();
-  const addresses = useBuilderAddresses();
+  const { addresses } = useBuilderAddresses();
   const [isPending, setIsPending] = useState(false);
   const [mounted, setMounted] = useState(false);
   

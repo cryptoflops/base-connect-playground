@@ -7,7 +7,7 @@ import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractScoreTracker() {
   const { address, isConnected } = useAccount();
-  const addresses = useBuilderAddresses();
+  const { addresses } = useBuilderAddresses();
 
   const { data: score, refetch } = useReadContract({
     address: addresses.scoreTracker as `0x${string}`,

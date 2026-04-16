@@ -7,7 +7,7 @@ import { useLogDispatch } from '@/context/LogContext';
 
 export function ContractEventStream() {
   const { isConnected } = useAccount();
-  const addresses = useBuilderAddresses();
+  const { addresses } = useBuilderAddresses();
 
   const [message, setMessage] = useState('');
   const [isPending, setIsPending] = useState(false);
