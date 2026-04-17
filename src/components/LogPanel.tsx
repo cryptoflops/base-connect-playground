@@ -2,13 +2,18 @@
 
 import { useState } from 'react';
 import { useLogs, useLogDispatch, LogEntry } from '@/context/LogContext';
+import { useAppKitNetwork } from '@reown/appkit/react';
+import { networks } from '@/config';
 
 export function LogPanel() {
   const logs = useLogs();
   const dispatch = useLogDispatch();
   const [filter, setFilter] = useState<'all' | 'tx' | 'error'>('all');
+  const { caipNetwork } = useAppKitNetwork();
+  const activeNetworkId = caipNetwork?.id ? Number(String(caipNetwork.id).split(':').pop()) : undefined;
 
-  const filteredLogs = logs.filter(log => filter === 'all' || log.type === filter);
+  const logsForChain = logs.filter(log => !log.chainId || log.chainId === activeNetworkId);
+  const filteredLogs = logsForChain.filter(log => filter === 'all' || log.type === filter);
 
   return (
     <>
@@ -23,7 +28,7 @@ export function LogPanel() {
         <div className="flex gap-4">
           <div className="flex-1 bg-[#050505] p-2 rounded border border-outline-variant/10">
             <div className="text-[9px] text-on-surface-variant uppercase tracking-tighter">Event Count</div>
-            <div className="text-sm font-mono text-white">{logs.length}</div>
+            <div className="text-sm font-mono text-white">{logsForChain.length}</div>
           </div>
           <div className="flex-1 bg-[#050505] p-2 rounded border border-outline-variant/10">
             <div className="text-[9px] text-on-surface-variant uppercase tracking-tighter">Network</div>
@@ -57,9 +62,9 @@ export function LogPanel() {
       </div>
 
       <div className="flex-1 overflow-y-auto custom-terminal-scrollbar p-4 space-y-3 font-mono text-[11px] leading-relaxed">
-        {logs.length === 0 ? (
+        {logsForChain.length === 0 ? (
           <div className="flex h-full items-center justify-center text-on-surface-variant font-sans text-center">
-            <p>No events recorded yet. Connect a wallet and trigger an action.</p>
+            <p>No events recorded yet on this network.</p>
           </div>
         ) : filteredLogs.length === 0 ? (
           <div className="flex h-full items-center justify-center text-on-surface-variant font-sans text-center">
@@ -103,6 +108,9 @@ function LogCard({ log }: { log: LogEntry }) {
     }
   }
 
+  const net = networks.find(n => n.id === log.chainId) || networks[0];
+  const explorerUrl = net?.blockExplorers?.default?.url || 'https://basescan.org';
+
   return (
     <div className={`p-3 rounded-lg ${getBadgeColor()}`}>
       <div className="flex justify-between mb-1">
@@ -113,7 +121,7 @@ function LogCard({ log }: { log: LogEntry }) {
       
       {log.txHash && (
         <a
-          href={`https://sepolia.basescan.org/tx/${log.txHash}`}
+          href={`${explorerUrl}/tx/${log.txHash}`}
           target="_blank"
           rel="noopener noreferrer"
           className="accent-text mt-1 block truncate hover:underline"

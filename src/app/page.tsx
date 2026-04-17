@@ -29,6 +29,7 @@ const networkIcons: Record<number, string> = {
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { caipNetwork, switchNetwork } = useAppKitNetwork();
 
   // Find active network cleanly, fallback to Base
@@ -51,8 +52,14 @@ export default function Home() {
     <div className="min-h-screen w-full flex flex-col font-sans" style={theme as React.CSSProperties}>
       
       {/* 1. Top Global Navigation */}
-      <nav className="fixed top-0 w-full z-50 chain-bg border-b border-outline-variant/15 flex justify-between items-center px-8 h-16 max-w-[1920px] mx-auto">
-        <div className="flex items-center gap-12">
+      <nav className="fixed top-0 w-full z-50 chain-bg border-b border-outline-variant/15 flex justify-between items-center px-4 lg:px-8 h-16 max-w-[1920px] mx-auto">
+        <div className="flex items-center gap-4 lg:gap-12">
+          <button 
+            className="lg:hidden text-on-surface hover:text-on-surface-variant flex items-center justify-center transition-colors"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            <span className="material-symbols-outlined">{isSidebarOpen ? 'close' : 'menu'}</span>
+          </button>
           <span className="text-xl font-black tracking-tighter text-on-surface uppercase font-['Inter']">Playground</span>
         </div>
         <div className="flex items-center gap-6">
@@ -61,9 +68,9 @@ export default function Home() {
             <a className="text-on-surface hover:accent-text border-b-2 border-transparent hover:accent-border pb-1 font-bold tracking-tight transition-colors" href="#">Contracts</a>
             <a className="text-on-surface hover:accent-text border-b-2 border-transparent hover:accent-border pb-1 font-bold tracking-tight transition-colors" href="#">Security</a>
           </div>
-          <div className="flex items-center gap-4 ml-4">
+          <div className="flex items-center gap-2 lg:gap-4 ml-2 lg:ml-4">
             <AppKitNetworkButton />
-            <div className="scale-90 origin-right">
+            <div className="scale-75 lg:scale-90 origin-right">
               <AppKitButton />
             </div>
           </div>
@@ -73,8 +80,16 @@ export default function Home() {
       {/* Main App Container */}
       <div className="flex flex-1 pt-16 min-h-screen">
         
+        {/* Mobile Sidebar Backdrop */}
+        {isSidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black/60 z-30 lg:hidden backdrop-blur-sm"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
+
         {/* 2. Left Sidebar (Infrastructure Terminal) */}
-        <aside className="fixed left-0 top-16 bottom-0 flex flex-col z-40 w-64 chain-surface-lowest border-r border-outline-variant/10">
+        <aside className={`fixed left-0 top-16 bottom-0 flex flex-col z-40 w-64 chain-surface-lowest border-r border-outline-variant/10 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
           <div className="p-6 border-b border-outline-variant/10">
             <h2 className="text-white font-bold font-['Inter']">Infrastructure</h2>
             <p className="text-[11px] font-semibold tracking-wider uppercase text-on-surface-variant opacity-70 mt-1">Active Terminal</p>
@@ -124,7 +139,7 @@ export default function Home() {
         </aside>
 
         {/* 3. Center Content Column */}
-        <main className="ml-64 flex-1 flex flex-col p-8 md:p-12 overflow-y-auto custom-terminal-scrollbar h-[calc(100vh-64px)]">
+        <main className="lg:ml-64 flex-1 flex flex-col p-4 md:p-8 xl:p-12 overflow-y-auto custom-terminal-scrollbar h-[calc(100vh-64px)] w-full">
           <div className="max-w-5xl mx-auto w-full">
             <NetworkHero networkId={Number(activeNet.id)} />
 
@@ -163,9 +178,13 @@ export default function Home() {
               </div>
             </div>
 
-            <footer className="mt-16 pt-8 border-t border-outline-variant/15 flex justify-between items-center text-[0.6875rem] uppercase tracking-[0.05em]">
+            <div className="xl:hidden mt-12 border border-outline-variant/10 rounded-xl overflow-hidden h-[600px] flex flex-col chain-surface-lowest shadow-xl">
+              <LogPanel />
+            </div>
+
+            <footer className="mt-16 pt-8 border-t border-outline-variant/15 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-center text-[0.6875rem] uppercase tracking-[0.05em] pb-8 xl:pb-0">
               <span className="text-on-surface-variant">© 2026 Multi-Chain Playground</span>
-              <div className="flex gap-8">
+              <div className="flex gap-6 md:gap-8">
                 <a className="text-[#C5C4DB] hover:text-on-surface transition-colors" href="#">Privacy</a>
                 <a className="text-[#C5C4DB] hover:text-on-surface transition-colors" href="#">Terms</a>
                 <a className="text-[#C5C4DB] hover:text-on-surface transition-colors" href="#">GitHub</a>
@@ -175,7 +194,7 @@ export default function Home() {
         </main>
 
         {/* 4. Right Sidebar (Terminal Logs) */}
-        <aside className="fixed right-0 top-16 bottom-0 w-[400px] chain-surface-lowest border-l border-outline-variant/10 flex flex-col z-30">
+        <aside className="hidden xl:flex fixed right-0 top-16 bottom-0 w-[400px] chain-surface-lowest border-l border-outline-variant/10 flex-col z-30">
           <LogPanel />
         </aside>
         
@@ -185,7 +204,7 @@ export default function Home() {
       </div>
 
       {/* Floating Action Button */}
-      <button className="fixed bottom-8 right-[430px] w-14 h-14 accent-bg accent-on-text rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-40">
+      <button className="fixed bottom-8 right-8 xl:right-[430px] w-14 h-14 accent-bg accent-on-text rounded-full flex items-center justify-center shadow-[0_0_20px_var(--chain-accent-glow)] lg:shadow-2xl hover:scale-110 active:scale-95 transition-all z-40">
         <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>add</span>
       </button>
     </div>

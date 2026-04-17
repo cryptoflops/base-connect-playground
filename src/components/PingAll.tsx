@@ -147,7 +147,7 @@ export function PingAll() {
   };
 
   return (
-    <div className="bg-surface-container rounded-xl p-8 flex justify-between items-center group hover:bg-surface-container-high transition-colors">
+    <div className="bg-surface-container rounded-xl p-8 flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-start md:items-center group hover:bg-surface-container-high transition-colors">
       <div>
         <h3 className="text-xl font-bold mb-2">Multi-Contract Orchestration</h3>
         <p className="text-on-surface-variant">Sponsored execution for multi-chain ping relays.</p>
@@ -155,7 +155,7 @@ export function PingAll() {
       <button
         onClick={run}
         disabled={!isConnected || isPending}
-        className="accent-bg accent-on-text px-8 py-4 rounded-lg font-bold flex items-center gap-3 hover:scale-[1.02] transition-transform disabled:opacity-50"
+        className="w-full md:w-auto accent-bg accent-on-text px-8 py-4 rounded-lg font-bold flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform disabled:opacity-50"
       >
         <span className="material-symbols-outlined">rocket_launch</span>
         {isPending ? 'Processing...' : 'Run Ping All'}

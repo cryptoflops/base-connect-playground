@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useReducer, Dispatch, ReactNode } from 'react';
+import { useAccount } from 'wagmi';
 
 export type LogType = 'info' | 'success' | 'error' | 'tx';
 
@@ -11,6 +12,7 @@ export interface LogEntry {
   message?: string;
   payload?: any;
   txHash?: string;
+  chainId?: number;
   timestamp: number;
 }
 
@@ -50,5 +52,21 @@ export function LogProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export const useLogDispatch = () => useContext(LogDispatchContext);
+
+export const useLogDispatch = () => {
+  const dispatch = useContext(LogDispatchContext);
+  const { chainId } = useAccount();
+
+  return (action: LogAction) => {
+    if (action.type === 'ADD_LOG' && typeof action.payload === 'object' && !action.payload.chainId) {
+      dispatch({
+        ...action,
+        payload: { ...action.payload, chainId },
+      });
+    } else {
+      dispatch(action);
+    }
+  };
+};
+
 export const useLogs = () => useContext(LogDataContext);
