@@ -20,6 +20,8 @@ import AppKitNetworkButton from '@/components/AppKitNetworkButton';
 import { networks } from '@/config';
 import { chainThemes, defaultTheme } from '@/lib/themes';
 
+import Image from 'next/image';
+
 const networkIcons: Record<number, string> = {
   8453: 'layers',
   42220: 'eco',
@@ -60,7 +62,17 @@ export default function Home() {
           >
             <span className="material-symbols-outlined">{isSidebarOpen ? 'close' : 'menu'}</span>
           </button>
-          <span className="text-xl font-black tracking-tighter text-on-surface uppercase font-['Inter']">Playground</span>
+          <div className="flex items-center gap-3">
+            <Image 
+              src="/playground-logo.png" 
+              alt="Playground Logo" 
+              width={32} 
+              height={32} 
+              className="rounded-md border-[1.5px] shadow-sm transition-all"
+              style={{ borderColor: 'var(--chain-accent)', boxShadow: '0 0 10px var(--chain-accent-glow)' }}
+            />
+            <span className="text-xl font-black tracking-tighter text-on-surface uppercase font-['Inter']">Playground</span>
+          </div>
         </div>
         <div className="flex items-center gap-6">
           <div className="hidden lg:flex items-center gap-8 text-sm">
