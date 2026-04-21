@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to Base Connect Playground! This document provides guidelines for contributing to the project.
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Fork the repository**
    - Click the "Fork" button at the top right of the repository page
@@ -155,7 +155,7 @@ When reporting bugs, please include:
    - Node.js version (if relevant)
 6. **Screenshots**: If applicable
 
-## 💡 Suggesting Features
+## Suggesting Features
 
 When suggesting features:
 
@@ -181,7 +181,7 @@ When updating documentation:
 - Include code examples where helpful
 - Update README.md if adding features
 
-## ✅ Pull Request Guidelines
+## Pull Request Guidelines
 
 ### PR Checklist
 
@@ -213,7 +213,7 @@ Add screenshots here
 Any additional information
 ```
 
-## 🤝 Code of Conduct
+## Code of Conduct
 
 - Be respectful and constructive
 - Welcome newcomers

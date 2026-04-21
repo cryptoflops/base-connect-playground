@@ -1,8 +1,8 @@
 ---
-description: WalletConnect (Reown) Builder Rewards — Master Research & Strategic Builder Plan
+description: WalletConnect (Reown) Builder Earning — Master Research & Strategic Builder Plan
 ---
 
-WalletConnect (Reown) Builder Rewards — Master Research & Strategic Builder Plan
+WalletConnect (Reown) Builder Earning — Master Research & Strategic Builder Plan
 
 Prepared for: cryptoflops (me)
 Objective: climb the TalentProtocol WalletConnect leaderboard + produce high-value open-source contributions + build revenue-earning on-chain products
@@ -40,7 +40,7 @@ login via email and social identity
 
 unified wallet onboarding experience
 
-When building a dApp, mini-app, or wallet, AppKit drastically reduces integration friction.
+When building a dApp, mobile-app, or wallet, AppKit drastically reduces integration friction.
 
 2. Reown / WalletConnect Learning Links
 Official Documentation & Specs
@@ -109,7 +109,7 @@ https://github.com/WalletConnect/walletconnect-utils
 
 https://github.com/WalletConnect/WalletConnectSwiftV2
 
-3. TalentProtocol — Earning Programs & WalletConnect Rewards
+3. TalentProtocol — Earning Programs & WalletConnect Earning
 Earn Pages
 
 Base Autumn: https://talent.app/~/earn/base-autumn
@@ -124,7 +124,7 @@ The leaderboard updates daily and tracks:
 
 SDK Integration
 
-Integration of WalletKit or Reown AppKit into any deployed app or mini-app.
+Integration of WalletKit or Reown AppKit into any deployed app or mobile-app.
 
 GitHub Contributions
 
@@ -186,7 +186,7 @@ https://talent.app/aef3ea1f-788c-491c-b909-76d06d2813fe/projects
 
 What top builders do consistently
 
-(A) Launch many small but polished mini-apps
+(A) Launch many small but polished mobile-apps
 
 Each one integrates Reown AppKit
 
@@ -225,7 +225,7 @@ gasless transaction demos using Smart Sessions
 
 (D) Clean GitHub presence
 
-each mini-app has its own repo
+each mobile-app has its own repo
 
 screenshots
 
