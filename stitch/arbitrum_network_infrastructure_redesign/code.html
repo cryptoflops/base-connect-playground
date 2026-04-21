@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Space+Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#004a76",
+                    "on-secondary-container": "#002c48",
+                    "surface-variant": "#26364c",
+                    "secondary": "#96ccff",
+                    "primary-container": "#12aaff",
+                    "surface": "#031429",
+                    "on-tertiary-fixed-variant": "#00504d",
+                    "inverse-primary": "#006398",
+                    "on-secondary": "#003353",
+                    "surface-container-highest": "#26364c",
+                    "tertiary-fixed": "#4afaf4",
+                    "surface-container-lowest": "#000e22",
+                    "error-container": "#93000a",
+                    "on-background": "#d4e3ff",
+                    "on-tertiary-fixed": "#00201f",
+                    "surface-bright": "#2a3a50",
+                    "outline-variant": "#3e4851",
+                    "on-surface-variant": "#bec7d3",
+                    "on-primary": "#003352",
+                    "secondary-fixed-dim": "#96ccff",
+                    "surface-container-low": "#0b1c31",
+                    "inverse-surface": "#d4e3ff",
+                    "background": "#031429",
+                    "on-surface": "#d4e3ff",
+                    "on-tertiary": "#003735",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#94ccff",
+                    "secondary-fixed": "#cee5ff",
+                    "surface-container-high": "#1a2b40",
+                    "on-error": "#690005",
+                    "surface-dim": "#031429",
+                    "tertiary-fixed-dim": "#04ddd7",
+                    "inverse-on-surface": "#213147",
+                    "surface-tint": "#94ccff",
+                    "tertiary-container": "#00b5b0",
+                    "on-primary-fixed-variant": "#004b74",
+                    "primary-fixed": "#cde5ff",
+                    "surface-container": "#0f2035",
+                    "primary": "#94ccff",
+                    "on-error-container": "#ffdad6",
+                    "secondary-container": "#1397e7",
+                    "on-tertiary-container": "#00403e",
+                    "outline": "#88929d",
+                    "on-primary-container": "#003c5e",
+                    "on-secondary-fixed": "#001d32",
+                    "on-primary-fixed": "#001d32",
+                    "tertiary": "#04ddd7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 43, 64, 0.6);
+            backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #031429;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1A2B40;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center w-full px-6 h-16 bg-[#031429] font-['Inter'] tracking-tight">
+<div class="flex items-center gap-8">
+<div class="text-xl font-bold text-[#94CCFF]">Superchain Ledger</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-[#94CCFF]/60 hover:text-[#94CCFF] hover:opacity-80 transition-opacity active:scale-95 duration-200" href="#">Build</a>
+<a class="text-[#94CCFF] border-b-2 border-[#12AAFF] pb-1 active:scale-95 duration-200" href="#">Deploy</a>
+<a class="text-[#94CCFF]/60 hover:text-[#94CCFF] hover:opacity-80 transition-opacity active:scale-95 duration-200" href="#">Verify</a>
+<a class="text-[#94CCFF]/60 hover:text-[#94CCFF] hover:opacity-80 transition-opacity active:scale-95 duration-200" href="#">Docs</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-surface-container-high px-3 py-1.5 rounded-lg border border-outline-variant/20">
+<div class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_#04ddd7]"></div>
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Arbitrum One</span>
+</div>
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-md font-semibold text-sm hover:opacity-90 active:scale-95 duration-200 transition-all">
+                Connect Wallet
+            </button>
+<div class="flex items-center gap-2 text-[#94CCFF]/60">
+<span class="material-symbols-outlined cursor-pointer hover:text-[#94CCFF]">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-[#94CCFF]">settings</span>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 bottom-0 flex flex-col py-4 px-2 bg-[#0B1C31] w-64 z-40">
+<div class="px-4 mb-8">
+<div class="text-lg font-bold text-[#94CCFF]">Developer Console</div>
+<div class="font-['Space_Grotesk'] text-xs text-[#94CCFF]/40">v2.4.0-stable</div>
+</div>
+<nav class="flex-1 space-y-1">
+<button class="flex items-center w-full gap-3 px-4 py-3 text-[#04DDD7] font-bold border-r-2 border-[#04DDD7] pr-2 bg-[#1A2B40] transition-colors active:translate-x-1 duration-150">
+<span class="material-symbols-outlined">terminal</span>
+<span class="font-['Space_Grotesk'] text-xs uppercase tracking-wider">Terminal</span>
+</button>
+<button class="flex items-center w-full gap-3 px-4 py-3 text-[#94CCFF]/40 hover:bg-[#1A2B40] hover:text-[#94CCFF] transition-colors active:translate-x-1 duration-150">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="font-['Space_Grotesk'] text-xs uppercase tracking-wider">Logs</span>
+</button>
+<button class="flex items-center w-full gap-3 px-4 py-3 text-[#94CCFF]/40 hover:bg-[#1A2B40] hover:text-[#94CCFF] transition-colors active:translate-x-1 duration-150">
+<span class="material-symbols-outlined">description</span>
+<span class="font-['Space_Grotesk'] text-xs uppercase tracking-wider">Contracts</span>
+</button>
+<button class="flex items-center w-full gap-3 px-4 py-3 text-[#94CCFF]/40 hover:bg-[#1A2B40] hover:text-[#94CCFF] transition-colors active:translate-x-1 duration-150">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-['Space_Grotesk'] text-xs uppercase tracking-wider">Metrics</span>
+</button>
+<button class="flex items-center w-full gap-3 px-4 py-3 text-[#94CCFF]/40 hover:bg-[#1A2B40] hover:text-[#94CCFF] transition-colors active:translate-x-1 duration-150">
+<span class="material-symbols-outlined">history</span>
+<span class="font-['Space_Grotesk'] text-xs uppercase tracking-wider">History</span>
+</button>
+</nav>
+<div class="mt-auto px-4 space-y-4">
+<button class="w-full bg-[#12aaff] text-[#003352] py-2 rounded-md font-bold text-xs uppercase tracking-widest active:scale-95 duration-150">
+                New Instance
+            </button>
+<div class="pt-4 border-t border-outline-variant/10 space-y-2">
+<div class="flex items-center gap-3 text-[#94CCFF]/40 hover:text-[#94CCFF] cursor-pointer">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase">Support</span>
+</div>
+<div class="flex items-center gap-3 text-[#94CCFF]/40 hover:text-[#94CCFF] cursor-pointer">
+<span class="material-symbols-outlined text-sm">sensors</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase">Status</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-8 min-h-screen">
+<div class="max-w-7xl mx-auto grid grid-cols-12 gap-8">
+<!-- Hero / Header Section -->
+<header class="col-span-12 mb-4">
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-10 border border-outline-variant/10">
+<div class="absolute top-0 right-0 w-1/3 h-full opacity-20 pointer-events-none">
+<div class="w-full h-full bg-gradient-to-l from-primary-container to-transparent"></div>
+</div>
+<div class="relative z-10 flex items-end justify-between">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="bg-primary p-2 rounded-lg">
+<span class="material-symbols-outlined text-on-primary">hub</span>
+</div>
+<span class="font-label text-xs tracking-[0.2em] text-tertiary uppercase">Network Active</span>
+</div>
+<h1 class="text-[3.5rem] font-extrabold tracking-tighter leading-none mb-4">
+                                Arbitrum <span class="text-primary">Network</span>
+</h1>
+<p class="text-on-surface-variant max-w-xl text-lg font-light">
+                                High-performance L2 infrastructure playground. Test cross-chain protocols, monitor real-time events, and deploy architectural ledger modules.
+                            </p>
+</div>
+<div class="text-right">
+<div class="font-label text-[10px] text-on-surface-variant uppercase mb-1">Latency</div>
+<div class="text-3xl font-bold text-tertiary">12ms</div>
+<div class="w-32 h-1 bg-surface-container-highest mt-2 rounded-full overflow-hidden">
+<div class="w-3/4 h-full bg-tertiary"></div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Interaction Cards (Asymmetric Grid) -->
+<div class="col-span-12 lg:col-span-8 grid grid-cols-2 gap-6">
+<!-- Smart Counter -->
+<section class="col-span-1 bg-surface-container-high p-6 rounded-xl border border-outline-variant/5 hover:bg-surface-bright transition-colors group">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-primary text-3xl">add_circle</span>
+<span class="font-label text-[10px] text-on-surface-variant/60">MODULE: 0x4A...2F</span>
+</div>
+<h3 class="text-xl font-bold mb-2">Smart Counter</h3>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Increment atomic state on the Nitro engine with optimized gas parameters.</p>
+<div class="flex items-center justify-between">
+<div class="text-2xl font-bold text-primary">1,402,991</div>
+<button class="bg-primary/10 text-primary px-4 py-2 rounded-md font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">Execute</button>
+</div>
+</section>
+<!-- Protocol Flag -->
+<section class="col-span-1 bg-surface-container-high p-6 rounded-xl border border-outline-variant/5 hover:bg-surface-bright transition-colors group">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-tertiary text-3xl">flag</span>
+<span class="font-label text-[10px] text-on-surface-variant/60">STATUS: ACTIVE</span>
+</div>
+<h3 class="text-xl font-bold mb-2">Protocol Flag</h3>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Toggle governance flags and monitor the propagation across L2 nodes.</p>
+<div class="flex items-center gap-4">
+<div class="flex-1 h-10 bg-surface-container-lowest rounded flex items-center px-4">
+<div class="w-2 h-2 rounded-full bg-tertiary mr-2"></div>
+<span class="font-label text-xs">READY_STATE_TRUE</span>
+</div>
+<button class="material-symbols-outlined p-2 bg-surface-container-highest rounded text-on-surface hover:text-tertiary">swap_horiz</button>
+</div>
+</section>
+<!-- Storage Module -->
+<section class="col-span-2 bg-surface-container-low p-8 rounded-xl border border-outline-variant/5 relative overflow-hidden">
+<div class="flex gap-10">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">database</span>
+<span class="font-label text-xs tracking-widest uppercase">Storage Ledger</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">Persistence Layer</h3>
+<p class="text-on-surface-variant text-sm mb-8 max-w-md">Commit persistent data structures to the Stylus-ready storage slots. Designed for high-frequency updates.</p>
+<div class="flex gap-4">
+<input class="flex-1 bg-surface-container-lowest border-none focus:ring-1 focus:ring-primary/40 rounded-md text-sm px-4" placeholder="Key value..." type="text"/>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-md font-bold text-xs uppercase">Commit</button>
+</div>
+</div>
+<div class="w-48 flex flex-col justify-between items-end border-l border-outline-variant/10 pl-10">
+<div class="text-right">
+<div class="font-label text-[10px] text-on-surface-variant uppercase">Efficiency</div>
+<div class="text-2xl font-bold text-tertiary">99.8%</div>
+</div>
+<div class="text-right">
+<div class="font-label text-[10px] text-on-surface-variant uppercase">Slot ID</div>
+<div class="font-label text-xs">#A-884-X</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Event Stream (Bento Large) -->
+<section class="col-span-2 bg-surface-container-high rounded-xl border border-outline-variant/5 overflow-hidden">
+<div class="p-6 border-b border-outline-variant/5 flex justify-between items-center bg-surface-bright/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">sensors</span>
+<h3 class="font-bold">Real-time Event Stream</h3>
+</div>
+<span class="font-label text-[10px] text-tertiary px-2 py-1 bg-tertiary/10 rounded">LIVE</span>
+</div>
+<div class="p-4 space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-primary/5 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">rocket_launch</span>
+</div>
+<div>
+<div class="text-sm font-bold">Contract Deployment</div>
+<div class="font-label text-[10px] text-on-surface-variant">0x...eb81 committed to block #182,331,044</div>
+</div>
+</div>
+<div class="text-xs font-label text-on-surface-variant">2s ago</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-tertiary/5 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-sm">toll</span>
+</div>
+<div>
+<div class="text-sm font-bold">Token Swap Batch</div>
+<div class="font-label text-[10px] text-on-surface-variant">Aggregation layer processed 44 sub-calls</div>
+</div>
+</div>
+<div class="text-xs font-label text-on-surface-variant">14s ago</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Activity Log Terminal (Right Side) -->
+<aside class="col-span-12 lg:col-span-4">
+<div class="sticky top-24 bg-surface-container-lowest rounded-xl border border-outline-variant/10 flex flex-col h-[700px] shadow-2xl overflow-hidden">
+<div class="bg-[#0B1C31] p-4 flex items-center justify-between border-b border-outline-variant/10">
+<div class="flex items-center gap-2">
+<div class="flex gap-1.5 mr-2">
+<div class="w-2.5 h-2.5 rounded-full bg-error/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary/40"></div>
+</div>
+<span class="font-label text-[10px] tracking-widest text-[#94CCFF] font-bold uppercase">Activity Log</span>
+</div>
+<span class="material-symbols-outlined text-sm text-[#94CCFF]/40 cursor-pointer">close_fullscreen</span>
+</div>
+<div class="flex-1 p-6 font-label text-[11px] leading-relaxed overflow-y-auto custom-scrollbar bg-black/20">
+<div class="mb-4">
+<span class="text-tertiary">[SYSTEM]</span> Initializing Superchain Ledger connection...
+                        </div>
+<div class="mb-4">
+<span class="text-primary">[AUTH]</span> Handshake successful. Key: 0x88...f2
+                        </div>
+<div class="mb-4">
+<span class="text-[#94CCFF]/40">[INFO]</span> Subscribing to Arbitrum Sequencer stream...
+                        </div>
+<div class="mb-4">
+<span class="text-tertiary">[EVENT]</span> New block minted: <span class="text-on-surface underline">182,331,043</span>
+</div>
+<div class="mb-4 pl-4 border-l border-outline-variant/20">
+<div class="text-on-surface-variant">- TX Hash: 0xfa...33</div>
+<div class="text-on-surface-variant">- Gas Used: 442,109</div>
+<div class="text-on-surface-variant">- State Root: 0x9c...a1</div>
+</div>
+<div class="mb-4">
+<span class="text-primary">[ACTION]</span> SmartCounter.increment() called by user
+                        </div>
+<div class="mb-4">
+<span class="text-[#94CCFF]/40">[METRIC]</span> L1 Settlement finalized for batch #992
+                        </div>
+<div class="mb-4">
+<span class="text-tertiary">[EVENT]</span> New block minted: <span class="text-on-surface underline">182,331,044</span>
+</div>
+<div class="mb-4">
+<span class="text-primary">[LOG]</span> Storage module sync in progress (88%)
+                        </div>
+<div class="mt-8 flex items-center gap-2 animate-pulse">
+<span class="w-2 h-4 bg-tertiary"></span>
+<span class="text-tertiary">awaiting_input...</span>
+</div>
+</div>
+<div class="p-4 bg-surface-container-high border-t border-outline-variant/10">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-tertiary font-bold">$</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-md pl-8 pr-4 py-2 text-xs font-label focus:ring-1 focus:ring-tertiary/30 placeholder:text-on-surface-variant/40" placeholder="Enter CLI command..." type="text"/>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer Decoration (Gradient Pulse) -->
+<footer class="fixed bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary-container/30 to-transparent pointer-events-none"></footer>
+</body></html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Playground | Multi-Chain Developer Experience</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#d4e3ff",
+                    "on-surface-variant": "#c5c4db",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed-variant": "#464747",
+                    "on-tertiary-fixed": "#001c39",
+                    "primary-fixed": "#e0e0ff",
+                    "secondary-container": "#464747",
+                    "on-error": "#690005",
+                    "outline-variant": "#454558",
+                    "primary": "#bec2ff",
+                    "background": "#131313",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-bright": "#393939",
+                    "on-tertiary-container": "#92bfff",
+                    "error-container": "#93000a",
+                    "tertiary-container": "#004d8d",
+                    "on-primary-container": "#b3b7ff",
+                    "primary-container": "#0000ff",
+                    "surface": "#131313",
+                    "surface-dim": "#131313",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary": "#00315d",
+                    "on-primary": "#0001ac",
+                    "secondary-fixed-dim": "#c7c6c6",
+                    "surface-container": "#202020",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "inverse-on-surface": "#303030",
+                    "primary-fixed-dim": "#bec2ff",
+                    "on-background": "#e5e2e1",
+                    "surface-container-highest": "#353535",
+                    "surface-tint": "#bec2ff",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-fixed": "#00006e",
+                    "secondary": "#c7c6c6",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#2a2a2a",
+                    "tertiary": "#a4c9ff",
+                    "on-primary-fixed-variant": "#0000ef",
+                    "outline": "#8f8fa4",
+                    "on-secondary-container": "#b5b5b5",
+                    "on-secondary": "#2f3131",
+                    "surface-variant": "#353535",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "surface-container-low": "#1b1c1c",
+                    "secondary-fixed": "#e3e2e2",
+                    "inverse-primary": "#343dff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #131313; color: #e5e2e1; font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(19, 19, 19, 0.7); backdrop-filter: blur(24px); border-top: 1px solid rgba(229, 226, 225, 0.1); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131313]/70 backdrop-blur-3xl flex justify-between items-center w-full px-8 h-20 max-w-[1920px] mx-auto">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-black tracking-tighter text-on-surface uppercase">Playground</span>
+<!-- Chain Switcher: Segmented Control -->
+<div class="hidden md:flex items-center bg-surface-container-lowest p-1 rounded-full border border-outline-variant/15">
+<button class="px-4 py-1.5 rounded-full text-[0.875rem] font-bold bg-primary-container text-white flex items-center gap-2 transition-all">
+<span class="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_#fff]"></span> Base
+                </button>
+<button class="px-4 py-1.5 rounded-full text-[0.875rem] font-medium text-on-surface-variant hover:text-on-surface transition-colors">Celo</button>
+<button class="px-4 py-1.5 rounded-full text-[0.875rem] font-medium text-on-surface-variant hover:text-on-surface transition-colors">Optimism</button>
+<button class="px-4 py-1.5 rounded-full text-[0.875rem] font-medium text-on-surface-variant hover:text-on-surface transition-colors">Arbitrum</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-on-surface border-b-2 border-[#0000FF] pb-1 font-['Inter'] font-bold tracking-tight" href="#">Docs</a>
+<a class="text-[#C5C4DB] hover:text-on-surface transition-colors font-['Inter'] font-bold tracking-tight" href="#">Contracts</a>
+<a class="text-[#C5C4DB] hover:text-on-surface transition-colors font-['Inter'] font-bold tracking-tight" href="#">Security</a>
+<a class="text-[#C5C4DB] hover:text-on-surface transition-colors font-['Inter'] font-bold tracking-tight" href="#">Explorer</a>
+</div>
+<div class="flex items-center gap-4 ml-4">
+<button class="p-2 text-on-surface-variant hover:scale-[1.02] hover:bg-[#2A2A2A] rounded-lg transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="bg-primary-container text-white px-6 py-2.5 rounded-lg font-bold hover:scale-[1.02] transition-transform active:scale-95">
+                    Connect Wallet
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content Layout -->
+<main class="pt-24 min-h-screen flex">
+<!-- Left Column: Interaction Area -->
+<section class="flex-1 px-8 pb-20 max-w-5xl">
+<!-- Hero Header -->
+<div class="mb-16 mt-8 relative">
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-container/10 blur-[120px] rounded-full pointer-events-none"></div>
+<h1 class="text-[3.5rem] font-bold tracking-tight leading-none mb-4">Base Network</h1>
+<p class="text-on-surface-variant text-[1.125rem] max-w-2xl leading-relaxed">
+                    A premium environment for multi-chain development. Execute cross-contract logic and manage state with millisecond precision.
+                </p>
+</div>
+<!-- Interaction Bento Grid -->
+<div class="space-y-20">
+<!-- Section: Infrastructure -->
+<div>
+<label class="font-['Inter'] text-[0.6875rem] tracking-[0.05em] uppercase text-on-surface-variant mb-6 block">Infrastructure</label>
+<div class="bg-surface-container rounded-xl p-8 flex justify-between items-center group hover:bg-surface-container-high transition-colors">
+<div>
+<h3 class="text-xl font-bold mb-2">Multi-Contract Orchestration</h3>
+<p class="text-on-surface-variant">Sponsored execution for multi-chain ping relays.</p>
+</div>
+<button class="bg-primary-container text-white px-8 py-4 rounded-lg font-bold flex items-center gap-3 hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined">rocket_launch</span>
+                            Run Ping All
+                        </button>
+</div>
+</div>
+<!-- Section: State Controls -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-surface-container-lowest p-8 rounded-xl border-l-2 border-primary-container">
+<label class="text-[0.6875rem] uppercase tracking-widest text-on-surface-variant mb-4 block">State Controls</label>
+<h3 class="text-2xl font-bold mb-6">Counter</h3>
+<div class="flex items-center gap-6">
+<span class="text-4xl font-mono bg-surface-container px-6 py-2 rounded-lg">42</span>
+<button class="flex-1 bg-surface-container-high py-4 rounded-lg font-bold hover:bg-on-surface-variant/20 transition-colors">Increment</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl border-l-2 border-primary-container">
+<label class="text-[0.6875rem] uppercase tracking-widest text-on-surface-variant mb-4 block">State Controls</label>
+<h3 class="text-2xl font-bold mb-6">Flag</h3>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-medium">Toggle Boolean State</span>
+<button class="w-16 h-8 bg-primary-container rounded-full relative p-1 transition-all">
+<span class="absolute right-1 top-1 w-6 h-6 bg-white rounded-full"></span>
+</button>
+</div>
+</div>
+</div>
+<!-- Section: Storage & Events -->
+<div>
+<label class="font-['Inter'] text-[0.6875rem] tracking-[0.05em] uppercase text-on-surface-variant mb-6 block">Storage &amp; Events</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container p-6 rounded-lg hover:bg-surface-container-high transition-all flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container">schedule</span>
+<span class="font-bold">Timestamp Ping</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<div class="bg-surface-container p-6 rounded-lg hover:bg-surface-container-high transition-all flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container">database</span>
+<span class="font-bold">Storage</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<div class="bg-surface-container p-6 rounded-lg hover:bg-surface-container-high transition-all flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container">view_stream</span>
+<span class="font-bold">Storage + Indexed Log</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<div class="bg-surface-container p-6 rounded-lg hover:bg-surface-container-high transition-all flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container">sensors</span>
+<span class="font-bold">Event Stream</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Section: Gamification -->
+<div class="bg-surface-container rounded-2xl overflow-hidden relative group">
+<img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity" data-alt="abstract digital waves with deep blue and purple neon glows on a dark background technical style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALB0h2M6zRId6aZDz1sYIx9SYdsipcI6dDS7XNVOZR9ZuhKJxyT3g02X7X7ZvjqWigbVBTRkc_bDSW34glXbmRBZ_cVeIguMvGPul84kbEyiUuhwmkUpaZVm-wS0o9ApusuiCJ1lsaalpwOP90jLE6f02W48tUGNHDSAF181A_IOT7zVBkOFK2jTDm_Ggpw3MoJiWD2TJDBUX_CZ5vUcKnR1vMTMLcOspguf_M-kqBPBGuWJ8Qfeb78jkpmSk5MoZI4rDvwUpA1do"/>
+<div class="relative p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+<div>
+<label class="text-[0.6875rem] uppercase tracking-[0.2em] text-primary mb-4 block">Gamification</label>
+<h2 class="text-4xl font-bold mb-2">Score Tracker</h2>
+<p class="text-on-surface-variant max-w-md">Global chain leaderboard integration. Secure your rank on the decentralized ledger.</p>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-5xl font-black text-white mb-4">1,402 pts</span>
+<button class="bg-white text-black px-10 py-3 rounded-full font-bold hover:scale-[1.05] transition-transform">Update Score</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-32 pt-16 border-t border-outline-variant/15 flex justify-between items-center text-[0.6875rem] uppercase tracking-[0.05em] font-['Inter']">
+<span class="text-on-surface-variant">© 2024 Multi-Chain Playground</span>
+<div class="flex gap-8">
+<a class="text-[#C5C4DB] hover:text-on-surface transition-colors" href="#">Privacy</a>
+<a class="text-[#C5C4DB] hover:text-on-surface transition-colors" href="#">Terms</a>
+<a class="text-[#C5C4DB] hover:text-on-surface transition-colors" href="#">GitHub</a>
+<a class="text-[#C5C4DB] hover:text-on-surface transition-colors" href="#">Status</a>
+</div>
+</footer>
+</section>
+<!-- Right Column: Fixed Activity Log Sidebar -->
+<aside class="fixed right-0 top-20 flex flex-col h-[calc(100vh-80px)] border-l border-[#454558]/15 bg-[#0E0E0E] w-80">
+<!-- Sidebar Header -->
+<div class="p-6 border-b border-outline-variant/10">
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-['Inter'] font-bold text-lg">Activity Log</h2>
+<span class="w-2 h-2 rounded-full bg-[#0000FF] animate-pulse"></span>
+</div>
+<p class="text-xs text-[#C5C4DB] opacity-60">Live Chain Stream (Base Mainnet)</p>
+</div>
+<!-- Activity Tabs -->
+<div class="flex border-b border-outline-variant/10">
+<button class="flex-1 py-4 text-xs font-bold text-on-surface border-b-2 border-primary-container flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+                    Logs
+                </button>
+<button class="flex-1 py-4 text-xs font-medium text-[#C5C4DB] opacity-60 hover:opacity-100 flex flex-col items-center gap-1 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+                    TXs
+                </button>
+<button class="flex-1 py-4 text-xs font-medium text-[#C5C4DB] opacity-60 hover:opacity-100 flex flex-col items-center gap-1 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">error_outline</span>
+                    Errors
+                </button>
+</div>
+<!-- Stream Content -->
+<div class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 font-mono text-[0.75rem]">
+<div class="p-3 bg-surface-container rounded-lg border-l-2 border-primary-container">
+<div class="flex justify-between mb-1">
+<span class="text-primary-container font-bold">CONNECTED</span>
+<span class="text-[10px] text-on-surface-variant">14:20:01</span>
+</div>
+<p class="text-on-surface-variant">Wallet 0x4f...a290 initialized on Base.</p>
+</div>
+<div class="p-3 bg-surface-container rounded-lg opacity-80">
+<div class="flex justify-between mb-1">
+<span class="text-tertiary font-bold">EVENT_LISTEN</span>
+<span class="text-[10px] text-on-surface-variant">14:19:45</span>
+</div>
+<p class="text-on-surface-variant">Listening for 'ScoreUpdated' events...</p>
+</div>
+<div class="p-3 bg-surface-container rounded-lg opacity-70">
+<div class="flex justify-between mb-1">
+<span class="text-on-surface font-bold">RPC_CALL</span>
+<span class="text-[10px] text-on-surface-variant">14:19:30</span>
+</div>
+<p class="text-on-surface-variant truncate">eth_getBlockByNumber ["latest", true]</p>
+</div>
+<div class="p-3 bg-error-container/20 rounded-lg border-l-2 border-error">
+<div class="flex justify-between mb-1">
+<span class="text-error font-bold">GAS_ALERT</span>
+<span class="text-[10px] text-on-surface-variant">14:18:12</span>
+</div>
+<p class="text-error/80">Spike detected. current: 0.0012 gwei</p>
+</div>
+<div class="p-3 bg-surface-container rounded-lg opacity-50">
+<div class="flex justify-between mb-1">
+<span class="text-on-surface font-bold">INIT</span>
+<span class="text-[10px] text-on-surface-variant">14:15:00</span>
+</div>
+<p class="text-on-surface-variant">Playground environment loaded.</p>
+</div>
+</div>
+<!-- Activity Actions -->
+<div class="p-4 border-t border-outline-variant/10">
+<button class="w-full bg-surface-container-high text-xs font-bold py-3 rounded-lg hover:bg-primary-container hover:text-white transition-all">
+                    Clear Terminal
+                </button>
+</div>
+</aside>
+</main>
+<!-- Contextual FAB (Only for specific pages, shown here for developer focus) -->
+<button class="fixed bottom-8 right-[340px] w-14 h-14 bg-primary-container text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</body></html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#ff5a51",
+                        "inverse-surface": "#fcf9f8",
+                        "background": "#0e0e0e",
+                        "secondary-container": "#842138",
+                        "outline-variant": "#484847",
+                        "error-container": "#a70138",
+                        "outline": "#767575",
+                        "tertiary-fixed": "#d09aff",
+                        "on-tertiary-fixed": "#280047",
+                        "secondary-fixed": "#ffc2c9",
+                        "on-secondary-fixed-variant": "#912b42",
+                        "surface-container-low": "#131313",
+                        "surface-container": "#1a1919",
+                        "surface-bright": "#2c2c2c",
+                        "surface-dim": "#0e0e0e",
+                        "on-tertiary": "#4b1079",
+                        "on-secondary": "#56001c",
+                        "on-primary-fixed-variant": "#600005",
+                        "on-secondary-container": "#ffc0c7",
+                        "on-secondary-fixed": "#6a0b27",
+                        "inverse-primary": "#c10015",
+                        "tertiary-dim": "#be85ee",
+                        "on-primary-container": "#4f0004",
+                        "secondary": "#fd7e94",
+                        "secondary-fixed-dim": "#ffaeb8",
+                        "tertiary-fixed-dim": "#c48bf4",
+                        "primary-fixed": "#ff766b",
+                        "on-error": "#490013",
+                        "on-surface": "#ffffff",
+                        "secondary-dim": "#f3778c",
+                        "surface-container-lowest": "#000000",
+                        "inverse-on-surface": "#565555",
+                        "error-dim": "#d73357",
+                        "error": "#ff6e84",
+                        "surface-container-high": "#201f1f",
+                        "surface-tint": "#ff8e83",
+                        "surface-variant": "#262626",
+                        "on-tertiary-fixed-variant": "#531a80",
+                        "tertiary": "#d29dff",
+                        "on-primary": "#650006",
+                        "primary": "#ff8e83",
+                        "surface": "#0e0e0e",
+                        "on-primary-fixed": "#000000",
+                        "on-background": "#ffffff",
+                        "on-surface-variant": "#adaaaa",
+                        "tertiary-container": "#c68df7",
+                        "on-tertiary-container": "#3e006a",
+                        "surface-container-highest": "#262626",
+                        "on-error-container": "#ffb2b9",
+                        "primary-dim": "#ea001d",
+                        "primary-container": "#ff766b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .status-pulse {
+            box-shadow: 0 0 10px #FF0421;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e0e]/70 backdrop-blur-xl bg-gradient-to-b from-[#131313] to-transparent">
+<nav class="flex justify-between items-center px-8 py-4 max-w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-[#FF0421]">Optimism</span>
+<div class="hidden lg:flex gap-6">
+<a class="font-['Inter'] font-semibold tracking-tight uppercase text-[12px] text-[#FF0421] border-b-2 border-[#FF0421] pb-1" href="#">Docs</a>
+<a class="font-['Inter'] font-semibold tracking-tight uppercase text-[12px] text-[#adaaaa] hover:text-white transition-colors" href="#">Contracts</a>
+<a class="font-['Inter'] font-semibold tracking-tight uppercase text-[12px] text-[#adaaaa] hover:text-white transition-colors" href="#">Security</a>
+<a class="font-['Inter'] font-semibold tracking-tight uppercase text-[12px] text-[#adaaaa] hover:text-white transition-colors" href="#">Explorer</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-container px-3 py-1.5 flex items-center gap-2 rounded-sm border border-outline-variant/20">
+<div class="w-2 h-2 rounded-full bg-primary-dim status-pulse"></div>
+<span class="text-[10px] font-bold tracking-widest uppercase">Optimism</span>
+</div>
+<button class="bg-primary-dim text-on-primary-fixed px-5 py-2 font-bold text-[12px] uppercase tracking-wider active:scale-95 transition-transform rounded-sm hover:bg-primary transition-all duration-200">
+                    Connect Wallet
+                </button>
+</div>
+</nav>
+</header>
+<!-- Sidebar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-[#131313] border-r border-[#484847]/20 hidden lg:flex flex-col py-6 gap-2">
+<div class="px-6 mb-8">
+<h3 class="font-['Inter'] tracking-widest uppercase text-[10px] font-bold text-on-surface-variant">Network Monitor</h3>
+<p class="text-[11px] text-primary-dim font-bold mt-1">Optimism Mainnet</p>
+</div>
+<div class="flex flex-col gap-1 px-2">
+<button class="flex items-center gap-4 px-4 py-3 text-[#ffffff] bg-[#262626] border-r-4 border-[#FF0421] transition-all duration-300">
+<span class="material-symbols-outlined text-[20px]" data-icon="analytics">analytics</span>
+<span class="font-['Inter'] tracking-widest uppercase text-[10px] font-bold">Activity</span>
+</button>
+<button class="flex items-center gap-4 px-4 py-3 text-[#adaaaa] hover:text-[#ffffff] hover:bg-[#262626]/50 transition-all duration-300">
+<span class="material-symbols-outlined text-[20px]" data-icon="receipt_long">receipt_long</span>
+<span class="font-['Inter'] tracking-widest uppercase text-[10px] font-bold">Logs</span>
+</button>
+<button class="flex items-center gap-4 px-4 py-3 text-[#adaaaa] hover:text-[#ffffff] hover:bg-[#262626]/50 transition-all duration-300">
+<span class="material-symbols-outlined text-[20px]" data-icon="terminal">terminal</span>
+<span class="font-['Inter'] tracking-widest uppercase text-[10px] font-bold">Terminal</span>
+</button>
+<button class="flex items-center gap-4 px-4 py-3 text-[#adaaaa] hover:text-[#ffffff] hover:bg-[#262626]/50 transition-all duration-300">
+<span class="material-symbols-outlined text-[20px]" data-icon="bolt">bolt</span>
+<span class="font-['Inter'] tracking-widest uppercase text-[10px] font-bold">Events</span>
+</button>
+</div>
+<div class="mt-auto px-4">
+<button class="w-full bg-surface-container-highest hover:bg-surface-bright text-on-surface border border-outline-variant/20 py-3 font-['Inter'] tracking-widest uppercase text-[10px] font-bold transition-all">
+                New Deployment
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-24 px-8 pb-12 flex-grow grid grid-cols-12 gap-8">
+<!-- Hero Section -->
+<section class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<div class="relative p-12 bg-surface-container-low overflow-hidden rounded-sm">
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary-dim/10 blur-[120px] rounded-full -mr-24 -mt-24"></div>
+<h1 class="text-6xl font-extrabold tracking-tighter leading-none mb-4">
+                    Optimism <br/>Network
+                </h1>
+<p class="text-on-surface-variant text-lg max-w-xl font-medium tracking-tight">
+                    Scaling Ethereum's vision with the Superchain. Experience low-cost transactions, high-speed execution, and uncompromising security.
+                </p>
+<div class="mt-10 flex gap-4">
+<button class="bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed px-8 py-4 font-bold uppercase tracking-widest text-sm rounded-sm hover:brightness-110 active:scale-95 transition-all">
+                        Run Ping All
+                    </button>
+<button class="bg-surface-variant/40 backdrop-blur-md text-on-surface px-8 py-4 font-bold uppercase tracking-widest text-sm border border-outline-variant/20 hover:bg-surface-variant transition-all">
+                        View Ecosystem
+                    </button>
+</div>
+</div>
+<!-- Interaction Modules Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Smart Counter -->
+<div class="bg-surface-container-high p-6 flex flex-col justify-between min-h-[180px] group hover:bg-surface-container-highest transition-colors duration-300 border-l-2 border-primary-dim/20">
+<div class="flex justify-between items-start">
+<span class="font-['Inter'] tracking-widest uppercase text-[10px] font-bold text-on-surface-variant">Smart Counter</span>
+<span class="material-symbols-outlined text-primary-dim" data-icon="add_circle">add_circle</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-5xl font-bold tracking-tighter">1,024</span>
+<button class="text-[10px] font-bold uppercase tracking-widest text-primary-dim hover:underline underline-offset-4">Increment</button>
+</div>
+</div>
+<!-- Protocol Flag -->
+<div class="bg-surface-container-high p-6 flex flex-col justify-between min-h-[180px] group hover:bg-surface-container-highest transition-colors duration-300 border-l-2 border-primary-dim/20">
+<div class="flex justify-between items-start">
+<span class="font-['Inter'] tracking-widest uppercase text-[10px] font-bold text-on-surface-variant">Protocol Flag</span>
+<span class="material-symbols-outlined text-primary-dim" data-icon="flag">flag</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-primary-dim status-pulse"></div>
+<span class="text-xl font-bold tracking-tight">Active Deployment</span>
+</div>
+</div>
+<!-- Storage -->
+<div class="bg-surface-container-high p-6 flex flex-col justify-between min-h-[180px] group hover:bg-surface-container-highest transition-colors duration-300 border-l-2 border-primary-dim/20">
+<div class="flex justify-between items-start">
+<span class="font-['Inter'] tracking-widest uppercase text-[10px] font-bold text-on-surface-variant">On-Chain Storage</span>
+<span class="material-symbols-outlined text-primary-dim" data-icon="database">database</span>
+</div>
+<div>
+<div class="h-1 w-full bg-surface-container-low mb-2 overflow-hidden">
+<div class="h-full bg-primary-dim w-[68%]"></div>
+</div>
+<span class="text-xs font-medium text-on-surface-variant uppercase tracking-widest">4.2 GB / 6.0 GB Total</span>
+</div>
+</div>
+<!-- Events -->
+<div class="bg-surface-container-high p-6 flex flex-col justify-between min-h-[180px] group hover:bg-surface-container-highest transition-colors duration-300 border-l-2 border-primary-dim/20">
+<div class="flex justify-between items-start">
+<span class="font-['Inter'] tracking-widest uppercase text-[10px] font-bold text-on-surface-variant">Emitted Events</span>
+<span class="material-symbols-outlined text-primary-dim" data-icon="notifications_active">notifications_active</span>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 bg-primary-dim flex items-center justify-center text-[10px] font-bold rounded-sm border-2 border-surface-container-high">E1</div>
+<div class="w-8 h-8 bg-surface-variant flex items-center justify-center text-[10px] font-bold rounded-sm border-2 border-surface-container-high">E2</div>
+<div class="w-8 h-8 bg-surface-variant flex items-center justify-center text-[10px] font-bold rounded-sm border-2 border-surface-container-high">E3</div>
+<div class="w-8 h-8 bg-surface-container-low flex items-center justify-center text-[10px] font-bold rounded-sm border-2 border-surface-container-high">+12</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Activity Log / Terminal -->
+<section class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<div class="bg-surface-container-lowest h-full min-h-[600px] border border-outline-variant/10 flex flex-col p-6">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary-dim" data-icon="code">code</span>
+<h2 class="font-['Inter'] tracking-widest uppercase text-[11px] font-bold text-white">Network Terminal</h2>
+</div>
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant/30"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant/30"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary-dim/80"></div>
+</div>
+</div>
+<div class="flex-grow space-y-4 font-mono text-[11px] overflow-y-auto">
+<!-- Log Item -->
+<div class="flex gap-4 group">
+<span class="text-on-surface-variant/40 whitespace-nowrap shrink-0">14:20:01</span>
+<div class="flex flex-col gap-1">
+<span class="text-primary-dim font-bold">[INFO]</span>
+<span class="text-on-surface">Initializing peer-to-peer discovery...</span>
+</div>
+</div>
+<!-- Log Item -->
+<div class="flex gap-4 group">
+<span class="text-on-surface-variant/40 whitespace-nowrap shrink-0">14:20:05</span>
+<div class="flex flex-col gap-1">
+<span class="text-primary-dim font-bold">[TX]</span>
+<span class="text-on-surface">Confirmed block #12049102</span>
+<span class="text-on-surface-variant">Hash: 0x4f...9e21</span>
+</div>
+</div>
+<!-- Error Item -->
+<div class="flex gap-4 group bg-error-container/10 p-2 -mx-2">
+<span class="text-on-surface-variant/40 whitespace-nowrap shrink-0">14:21:12</span>
+<div class="flex flex-col gap-1">
+<span class="text-error font-bold">[ERR]</span>
+<span class="text-error-dim">Sequencer latency spike detected: +240ms</span>
+</div>
+</div>
+<!-- Log Item -->
+<div class="flex gap-4 group">
+<span class="text-on-surface-variant/40 whitespace-nowrap shrink-0">14:22:00</span>
+<div class="flex flex-col gap-1">
+<span class="text-primary-dim font-bold">[INFO]</span>
+<span class="text-on-surface">Protocol sync 100% complete.</span>
+</div>
+</div>
+<!-- Log Item -->
+<div class="flex gap-4 group">
+<span class="text-on-surface-variant/40 whitespace-nowrap shrink-0">14:22:45</span>
+<div class="flex flex-col gap-1">
+<span class="text-primary-dim font-bold">[EVENT]</span>
+<span class="text-on-surface">Bridge Deposit confirmed from L1</span>
+<span class="text-primary-dim text-[10px]">Value: 14.5 ETH</span>
+</div>
+</div>
+<div class="flex gap-4 animate-pulse">
+<span class="text-primary-dim">_</span>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-outline-variant/10">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="text-[9px] uppercase tracking-widest font-bold text-on-surface-variant mb-1">TPS</p>
+<p class="text-xl font-bold">142.5</p>
+</div>
+<div>
+<p class="text-[9px] uppercase tracking-widest font-bold text-on-surface-variant mb-1">Gas Price</p>
+<p class="text-xl font-bold">0.001 <span class="text-[10px] text-primary-dim">GWEI</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 mt-auto bg-[#0e0e0e] border-t border-[#484847]/10">
+<div class="flex flex-row justify-between items-center px-12">
+<div class="flex flex-col gap-1">
+<p class="font-['Inter'] text-[11px] tracking-wider text-[#adaaaa]">© 2024 Optimism Foundation. Built for the Superchain.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-[11px] tracking-wider text-[#adaaaa] hover:text-white transition-colors" href="#">Terms</a>
+<a class="font-['Inter'] text-[11px] tracking-wider text-[#adaaaa] hover:text-white transition-colors" href="#">Privacy</a>
+<a class="font-['Inter'] text-[11px] tracking-wider text-[#adaaaa] hover:text-white transition-colors" href="#">Status</a>
+</div>
+</div>
+</footer>
+</body></html>

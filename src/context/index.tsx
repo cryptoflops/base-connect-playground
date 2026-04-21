@@ -31,11 +31,13 @@ export const appKit = createAppKit({
 });
 
 import { LogProvider } from './LogContext';
+import NetworkEnforcer from '@/components/NetworkEnforcer';
 
 export default function ContextProvider({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>
+        <NetworkEnforcer />
         <LogProvider>{children}</LogProvider>
       </QueryClientProvider>
     </WagmiProvider>

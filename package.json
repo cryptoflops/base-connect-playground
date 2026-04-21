@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
+    "build:worker": "npx @opennextjs/cloudflare",
+    "deploy": "npm run build && npm run build:worker && npx wrangler deploy",
     "start": "next start --webpack"
   },
   "dependencies": {
@@ -12,7 +14,7 @@
     "@reown/appkit-adapter-wagmi": "^1.8.14",
     "@tanstack/react-query": "^5.90.10",
     "autoprefixer": "^10.4.22",
-    "next": "16.0.7",
+    "next": "^16.2.3",
     "postcss": "^8.5.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -21,11 +23,13 @@
     "wagmi": "^2.19.4"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.19.2",
     "@tailwindcss/postcss": "^4.1.17",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "baseline-browser-mapping": "^2.10.16",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.84.0"
   }
 }

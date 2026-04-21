@@ -1,0 +1,101 @@
+[
+  {
+    "inputs": [{"internalType": "address", "name": "_cUSD", "type": "address"}],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true, "internalType": "uint256", "name": "escrowId", "type": "uint256"},
+      {"indexed": true, "internalType": "address", "name": "client", "type": "address"},
+      {"indexed": true, "internalType": "address", "name": "freelancer", "type": "address"},
+      {"indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256"}
+    ],
+    "name": "EscrowCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true, "internalType": "uint256", "name": "escrowId", "type": "uint256"}
+    ],
+    "name": "EscrowReleased",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true, "internalType": "uint256", "name": "escrowId", "type": "uint256"}
+    ],
+    "name": "EscrowDisputed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true, "internalType": "uint256", "name": "escrowId", "type": "uint256"}
+    ],
+    "name": "EscrowRefunded",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "cUSD",
+    "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {"internalType": "address", "name": "freelancer", "type": "address"},
+      {"internalType": "uint256", "name": "amount", "type": "uint256"}
+    ],
+    "name": "createEscrow",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256", "name": "escrowId", "type": "uint256"}],
+    "name": "releaseEscrow",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256", "name": "escrowId", "type": "uint256"}],
+    "name": "disputeEscrow",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256", "name": "escrowId", "type": "uint256"}],
+    "name": "claimRefund",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "escrowCounter",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "name": "escrows",
+    "outputs": [
+      {"internalType": "address", "name": "client", "type": "address"},
+      {"internalType": "address", "name": "freelancer", "type": "address"},
+      {"internalType": "uint256", "name": "amount", "type": "uint256"},
+      {"internalType": "uint256", "name": "disputeTimeout", "type": "uint256"},
+      {"internalType": "bool", "name": "isReleased", "type": "bool"},
+      {"internalType": "bool", "name": "isDisputed", "type": "bool"}
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
