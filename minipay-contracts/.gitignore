@@ -1,0 +1,15 @@
+# Compiler output
+cache/
+out/
+
+# Libraries (installed via forge install)
+lib/
+
+# Broadcast logs
+broadcast/
+
+# Environment
+.env
+
+# OS
+.DS_Store
