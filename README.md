@@ -1,5 +1,13 @@
 # Base Connect Playground
 
+<p align="center">
+  <img src="./public/logos/celo-saver.png" height="80" alt="CeloSaver" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./public/logos/proof-pay.png" height="80" alt="ProofPay" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./public/logos/market-pulse.png" height="80" alt="MarketPulse" />
+</p>
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-91.8%25-blue)](https://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-16.0-black)](https://nextjs.org/)
