@@ -21,3 +21,4 @@ pnpm-debug.log*
 .DS_Store
 base-connect-playground-v1
 foundry_contracts/.env
+.agent/
