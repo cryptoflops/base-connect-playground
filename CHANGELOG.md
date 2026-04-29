@@ -1,10 +1,10 @@
 # Changelog
 
-## [Unreleased] - 2026-04-28
+## [Unreleased] - 2026-04-29
 
 ### Changed
-- Improved loading state indicators
-- Added retry logic for failed transactions
+- Improved error handling in contract interactions
+- Reduced bundle size by tree-shaking
 
 ### Fixed
-- Corrected gas estimation for Celo L2
+- Resolved race condition in wallet sync
