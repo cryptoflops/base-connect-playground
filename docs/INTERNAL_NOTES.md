@@ -10,3 +10,4 @@
 - Reviewed component tree performance, seems stable.
 - Fixed a minor typo in the internal documentation.
 - Refactored the wallet connection hooks for cleaner state.
+- Verified backward compatibility with older API responses.
