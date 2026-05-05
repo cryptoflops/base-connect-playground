@@ -8,3 +8,4 @@
 - Verified backward compatibility with older API responses.
 - Reviewed component tree performance, seems stable.
 - Reviewed component tree performance, seems stable.
+- Fixed a minor typo in the internal documentation.
