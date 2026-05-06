@@ -1,10 +1,10 @@
 # Changelog
 
-## [Unreleased] - 2026-04-29
+## [Unreleased] - 2026-05-06
 
 ### Changed
-- Improved error handling in contract interactions
-- Reduced bundle size by tree-shaking
+- Optimized RPC batch requests
+- Added input validation for amounts
 
 ### Fixed
-- Resolved race condition in wallet sync
+- Fixed decimal formatting for small amounts
