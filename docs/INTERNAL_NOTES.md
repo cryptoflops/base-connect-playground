@@ -13,3 +13,4 @@
 - Verified backward compatibility with older API responses.
 - Reviewed component tree performance, seems stable.
 - Fixed a minor typo in the internal documentation.
+- Tested gas estimations on Celo Alfajores, looks good.
