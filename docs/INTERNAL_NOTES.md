@@ -14,3 +14,4 @@
 - Reviewed component tree performance, seems stable.
 - Fixed a minor typo in the internal documentation.
 - Tested gas estimations on Celo Alfajores, looks good.
+- Refactored the wallet connection hooks for cleaner state.
