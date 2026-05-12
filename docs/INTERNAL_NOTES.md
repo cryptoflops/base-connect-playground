@@ -17,3 +17,4 @@
 - Refactored the wallet connection hooks for cleaner state.
 - Adjusting padding to align with design specs.
 - Fixed a minor typo in the internal documentation.
+- Cleaned up some dead code in the utility helpers.
