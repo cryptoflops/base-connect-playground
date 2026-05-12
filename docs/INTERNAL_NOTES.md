@@ -15,3 +15,4 @@
 - Fixed a minor typo in the internal documentation.
 - Tested gas estimations on Celo Alfajores, looks good.
 - Refactored the wallet connection hooks for cleaner state.
+- Adjusting padding to align with design specs.
