@@ -20,3 +20,4 @@
 - Cleaned up some dead code in the utility helpers.
 - Pushing work-in-progress state before context switch.
 - Verified backward compatibility with older API responses.
+- Investigated rendering jitter on mobile layout.
