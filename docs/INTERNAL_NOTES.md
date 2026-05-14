@@ -21,3 +21,4 @@
 - Pushing work-in-progress state before context switch.
 - Verified backward compatibility with older API responses.
 - Investigated rendering jitter on mobile layout.
+- Investigated rendering jitter on mobile layout.
