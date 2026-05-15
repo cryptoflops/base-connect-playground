@@ -1,10 +1,10 @@
 # Changelog
 
-## [Unreleased] - 2026-05-06
+## [Unreleased] - 2026-05-15
 
 ### Changed
-- Optimized RPC batch requests
-- Added input validation for amounts
+- Updated dependencies to latest stable
+- Cleaned up unused imports
 
 ### Fixed
-- Fixed decimal formatting for small amounts
+- Corrected gas estimation for Celo L2
