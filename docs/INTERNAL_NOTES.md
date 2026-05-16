@@ -27,3 +27,4 @@
 - Pushing work-in-progress state before context switch.
 - Reviewed component tree performance, seems stable.
 - Fixed a minor typo in the internal documentation.
+- Looking into potential race conditions during state hydration.
