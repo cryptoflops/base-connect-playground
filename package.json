@@ -1,7 +1,6 @@
 {
-  "name": "base-connect-playground",
+  "name": "@cryptoflops/base-connect-playground",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
@@ -31,5 +30,17 @@
     "baseline-browser-mapping": "^2.10.16",
     "typescript": "^5",
     "wrangler": "^4.84.0"
+  },
+  "files": [
+    "src",
+    "contracts",
+    "public",
+    "next.config.ts",
+    "tsconfig.json",
+    "tailwind.config.js",
+    "postcss.config.mjs"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }
