@@ -1,10 +1,10 @@
 # Changelog
 
-## [Unreleased] - 2026-05-16
+## [Unreleased] - 2026-05-18
 
 ### Changed
-- Updated dependencies to latest stable
-- Added retry logic for failed transactions
+- Improved error handling in contract interactions
+- Cleaned up unused imports
 
 ### Fixed
-- Fixed edge case in balance display
+- Corrected gas estimation for Celo L2
