@@ -28,3 +28,4 @@
 - Reviewed component tree performance, seems stable.
 - Fixed a minor typo in the internal documentation.
 - Looking into potential race conditions during state hydration.
+- Noticed the useBalance hook refetches on every block. Consider adding staleTime to reduce RPC load.
