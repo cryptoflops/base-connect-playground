@@ -31,3 +31,4 @@
 - Noticed the useBalance hook refetches on every block. Consider adding staleTime to reduce RPC load.
 - Tested cUSD approve + deposit flow on Celo mainnet. Gas estimates stable at ~45k per tx.
 - The useMiniPay hook detects isMiniPay synchronously, but some devices inject the provider async. Added 500ms fallback.
+- Reviewed component tree performance after adding MiniPayBar, no measurable regression.
