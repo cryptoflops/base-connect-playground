@@ -23,4 +23,4 @@ npm run dev
 - Follow existing patterns in the codebase
 - Run `npm run lint` before submitting
 
-_Last updated: 2026-05-14T08:46:27.865Z_
+_Last updated: 2026-05-24T12:48:11.391Z_
