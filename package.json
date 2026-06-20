@@ -29,7 +29,7 @@
     "@types/react-dom": "^19",
     "baseline-browser-mapping": "^2.10.16",
     "typescript": "^5",
-    "wrangler": "^4.84.0"
+    "wrangler": "^4.103.0"
   },
   "files": [
     "src",
