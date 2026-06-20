@@ -32,7 +32,7 @@ jobs:
       - name: Build
         run: npm run build --if-present
         env:
-          NEXT_PUBLIC_WC_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WC_PROJECT_ID }}
+          NEXT_PUBLIC_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_PROJECT_ID }}
       - name: Lint
         run: npm run lint --if-present
       - name: Test
